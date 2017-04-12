@@ -1,0 +1,68 @@
+$nav-color: #1c2b36;
+
+
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+    background: $nav-color;
+}
+
+.app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    .app-header {
+        position: relative;
+        height: 50px;
+        display: flex;
+
+        .app-icon {
+            background: $nav-color;
+            width: 200px;
+            height: 100%;
+            font-size: 16px;
+            text-align: center;
+            line-height: 50px;
+            color: #c4d0d9;
+        }
+        .header-tool {
+            flex: 1;
+            position: relative;
+            border-bottom: 1px solid #ccc;
+        }
+        .log-out {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    }
+
+    .app-body {
+        flex: 1;
+        display: flex;
+
+        .app-nav-wrap {
+            background: $nav-color;
+            width: 200px;
+        }
+
+        .app-nav {
+            width: 200px;
+            .navigate-title {
+                color: #5c798f;
+                margin-left: 15px;
+            }
+        }
+
+        .app-page-content {
+            flex: 1;
+            background: #f0f3f4;
+            overflow: hidden;
+        }
+        .app-function-page {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+}
