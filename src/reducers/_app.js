@@ -4,22 +4,16 @@
 import {fromJS} from 'immutable'
 import * as types from '../core/constants/types'
 import * as phase from '../core/constants/phase'
-import {handleNewState} from '../core/util/reducer-utils'
 
 const initValue = {
   loginSuccess: false,
   failureMessage: '',
 }
 
-export default function _app(state = initValue, action) {
-  const iState = fromJS(state)
-  return handleNewState(state, iState, getNextIState())
+export default function _app(iState = fromJS(initValue), action) {
+  let nextIState = iState
+  switch (action.type) {
 
-  function getNextIState() {
-    let nextIState = iState
-    switch (action.type) {
-
-    }
-    return nextIState
   }
+  return nextIState
 }

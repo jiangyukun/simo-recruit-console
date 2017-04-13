@@ -1,10 +1,9 @@
 /**
  * Created by jiangyu2016 on 16/10/15.
  */
-import React, {Component, PropTypes} from 'react'
-import classnames from 'classnames'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-import {calculatePageIndex} from '../core/util/page-utils'
 const pageSize = 10
 
 class PaginateList extends Component {
@@ -17,7 +16,10 @@ class PaginateList extends Component {
 
   sortByList = []
 
-  beginFetch() {
+  beginFetch(restart) {
+    if (restart) {
+      this.setState({currentPage: 1})
+    }
     this.setState({draw: this.state.draw + 1}, () => this.props.doFetch())
   }
 

@@ -1,9 +1,11 @@
 /**
  * Created by jiangyu2016 on 16/10/15.
  */
-import React, {Component, PropTypes, cloneElement} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import {merge} from 'lodash'
+
 import Select1 from '../ui/Select1'
 
 class FilterItem extends Component {

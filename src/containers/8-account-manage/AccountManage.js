@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/4/12.
  */
-import React, {Component} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {merge} from 'lodash'
 
@@ -14,17 +15,19 @@ import Button from '../../components/element/Button'
 import * as actions from './account-manage'
 import FilterItem from "../../components/query-filter/FilterItem"
 
-class AccountManage extends Component {
+class AccountManage extends React.Component {
   state = {
-    index: -1
+    index: -1,
+    searchKey: '',
+    showAdd: false
   }
 
-  beginFetch = (fromPage) => {
-    this._paginateList.beginFetch(fromPage)
+  beginFetch = (restart) => {
+    this._paginateList.beginFetch(restart)
   }
 
   doFetch = () => {
-    this.props.fetchList(merge({}, this._paginateList.getParams()))
+    this.props.fetchList(merge({}, this._paginateList.getParams(), {"key_Words": this.state.searchKey}))
   }
 
   componentDidMount() {
@@ -35,8 +38,11 @@ class AccountManage extends Component {
     return (
       <div className="app-function-page">
 
-        <SearchBox>
-          <Button>添加</Button>
+        <SearchBox value={this.state.searchKey} placeholder="输入分组名称"
+                   onSearchKeyChange={key => this.setState({searchKey: key})}
+                   beginFetch={this.beginFetch}
+        >
+          <Button type="add">创建账号</Button>
         </SearchBox>
 
         <PaginateList ref={c => this._paginateList = c}

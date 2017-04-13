@@ -2,6 +2,7 @@
  * Created by jiangyukun on 2016/11/27.
  */
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {findDOMNode} from 'react-dom'
 import {events} from 'dom-helpers'
 

@@ -1,7 +1,8 @@
 /**
  * Created by jiangyu2016 on 16/10/15.
  */
-import React, {Component, PropTypes, Children} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import {merge} from 'lodash'
 import Form from '../element/Form'

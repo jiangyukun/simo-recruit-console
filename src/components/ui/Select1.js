@@ -1,6 +1,8 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {findDOMNode} from 'react-dom'
 import classnames from 'classnames'
+
 import {events} from 'dom-helpers'
 import keycode from '../../core/constants/keycode'
 

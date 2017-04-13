@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/4/11.
  */
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import Header from './Header'
 import Nav from './Nav'

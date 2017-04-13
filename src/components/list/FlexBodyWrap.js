@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/1/19.
  */
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 class FlexBodyWrap extends React.Component {
   componentDidUpdate() {

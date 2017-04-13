@@ -2,7 +2,9 @@
  * 基于Flex的列表
  * Created by jiangyukun on 2017/3/6.
  */
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+
 import Spinner from '../ui/Spinner'
 
 class FlexList extends Component {

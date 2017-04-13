@@ -2,6 +2,7 @@
  * jiangyukun on 2016/9/8 11:26
  */
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 export default class Loading extends Component {
   constructor(props) {

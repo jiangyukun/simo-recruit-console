@@ -3,27 +3,25 @@
  */
 import {fromJS} from 'immutable'
 import {accountManage} from '../../core/constants/types'
-import * as phase from '../../core/constants/phase'
-import {handleNewState, updateList} from '../../core/util/reducer-utils'
+import phase from '../../core/constants/phase'
+import {updateList, handleCommonState} from '../../core/util/reducer-utils'
 
 const initValue = {
   hasMore: true,
-  list: []
+  list: [],
+  loading: false
 }
 
-export default function account_manage(state = initValue, action) {
-  const iState = fromJS(state)
-  return handleNewState(state, iState, getNextIState())
+export default function account_manage(iState = fromJS(initValue), action) {
 
-  function getNextIState() {
-    let nextIState = iState
-    switch (action.type) {
-      case accountManage.FETCH_LIST + phase.SUCCESS:
-        console.log(1)
-        nextIState = updateList(iState, list => list.concat(action.list))
-        console.log(nextIState.toJS())
-        break
-    }
-    return nextIState
+  let nextIState = iState
+  switch (action.type) {
+
+    case accountManage.FETCH_LIST + phase.SUCCESS:
+      nextIState = updateList(iState, list => list.concat(action.list)).set('hasMore', action.hasMore)
+      break
+
   }
+
+  return handleCommonState(action, accountManage.FETCH_LIST, nextIState)
 }

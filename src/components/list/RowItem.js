@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/1/19.
  */
-import React, {Component, PropTypes, Children} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 class RowItem extends Component {
   render() {

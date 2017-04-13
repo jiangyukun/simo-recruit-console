@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/3/14.
  */
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 class IndexPage extends Component {
 

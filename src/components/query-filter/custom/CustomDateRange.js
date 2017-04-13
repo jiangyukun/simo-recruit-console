@@ -1,7 +1,8 @@
 /**
  * Created by jiangyu2016 on 16/10/15.
  */
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import DatePicker from 'antd/lib/date-picker'
 import classnames from 'classnames'
 

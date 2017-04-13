@@ -1,9 +1,10 @@
 /**
  * Created by jiangyukun on 2016/11/27.
  */
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import Select1 from '../../Select1'
+import Select1 from '../../ui/Select1'
 
 class SubOptions extends Component {
   constructor(props, context) {

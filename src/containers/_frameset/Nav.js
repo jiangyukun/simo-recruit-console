@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/4/12.
  */
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import {Link, routerShape} from 'react-router'
 import Menu from 'antd/lib/menu'
 

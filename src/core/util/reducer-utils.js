@@ -1,13 +1,8 @@
 /**
  * Created by jiangyukun on 2017/4/12.
  */
-
-export function handleNewState(state, iState, nextIState) {
-  if (iState === nextIState) {
-    return state
-  }
-  return nextIState.toJS()
-}
+import {List} from 'immutable'
+import phase from '../../core/constants/phase'
 
 export function updateList(curIState, callback) {
   const list = curIState.get('list')
@@ -23,4 +18,26 @@ export function updateListItem(curIState, listItemKey, id, callback) {
     return curIState
   }
   return curIState.update('list', list => list.update(list.indexOf(match), item => callback(item)))
+}
+
+/**
+ * 处理loading和list
+ * @param action
+ * @param targetType
+ * @param iState
+ * @returns nextIState
+ */
+export function handleCommonState(action, targetType, iState) {
+  let nextIState = iState
+  switch (action.type) {
+    case targetType + phase.START:
+      nextIState = iState.set('loading', true).set('list', List([]))
+      break
+
+    case targetType + phase.SUCCESS:
+    case targetType + phase.FAILURE:
+      nextIState = iState.set('loading', false)
+      break
+  }
+  return nextIState
 }

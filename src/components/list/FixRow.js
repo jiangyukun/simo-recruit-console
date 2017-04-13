@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/1/19.
  */
-import React, {Component, PropTypes, cloneElement, Children} from 'react'
+import React, {Component, cloneElement, Children} from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 class FixRow extends Component {

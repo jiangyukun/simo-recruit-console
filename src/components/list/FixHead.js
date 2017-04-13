@@ -1,7 +1,8 @@
 /**
  * Created by jiangyukun on 2017/1/19.
  */
-import React, {Component, PropTypes, Children, cloneElement} from 'react'
+import React, {Component, Children, cloneElement} from 'react'
+import PropTypes from 'prop-types'
 
 class FixHead extends Component {
   constructor(props, context) {
