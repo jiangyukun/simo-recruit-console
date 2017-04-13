@@ -41,3 +41,11 @@ export function handleCommonState(action, targetType, iState) {
   }
   return nextIState
 }
+
+export function handleClear(action, targetType, key, iState) {
+    console.log(action.type)
+  if (action.type == phase.CLEAR + targetType) {
+    return iState.set(key, false)
+  }
+  return iState
+}

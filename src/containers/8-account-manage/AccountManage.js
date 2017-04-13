@@ -6,14 +6,14 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {merge} from 'lodash'
 
-import PaginateList from '../../components/PaginateList'
-import QueryFilter from '../../components/query-filter/QueryFilter'
-import {FlexList, FixHead, FixRow, HeadItem, RowItem, FlexBodyWrap} from '../../components/list'
 import SearchBox from '../../components/ui/SearchBox'
 import Button from '../../components/element/Button'
+import PaginateList from '../../components/PaginateList'
+import {FlexList, FixHead, FixRow, HeadItem, RowItem, FlexBodyWrap} from '../../components/list'
+import AddAccountDialog from './dialog/AddAccountDialog'
 
+import {accountManage} from '../../core/constants/types'
 import * as actions from './account-manage'
-import FilterItem from "../../components/query-filter/FilterItem"
 
 class AccountManage extends React.Component {
   state = {
@@ -34,15 +34,31 @@ class AccountManage extends React.Component {
     this.beginFetch()
   }
 
+  componentDidUpdate() {
+    if (this.props.addAccountSuccess) {
+      this.props.clearState(accountManage.ADD_ACCOUNT)
+      this.beginFetch(true)
+    }
+  }
+
   render() {
     return (
       <div className="app-function-page">
+
+        {
+          this.state.showAdd && (
+            <AddAccountDialog
+              addAccount={this.props.addAccount}
+              closeSignal={this.props.addAccountSuccess}
+              onExited={() => this.setState({showAdd: false})}/>
+          )
+        }
 
         <SearchBox value={this.state.searchKey} placeholder="输入分组名称"
                    onSearchKeyChange={key => this.setState({searchKey: key})}
                    beginFetch={this.beginFetch}
         >
-          <Button type="add">创建账号</Button>
+          <Button type="add" onClick={() => this.setState({showAdd: true})}>创建账号</Button>
         </SearchBox>
 
         <PaginateList ref={c => this._paginateList = c}
@@ -88,7 +104,9 @@ class AccountManage extends React.Component {
   }
 }
 
-AccountManage.propTypes = {}
+AccountManage.propTypes = {
+  clearState: PropTypes.func
+}
 
 function mapStateToProps(state) {
   return {

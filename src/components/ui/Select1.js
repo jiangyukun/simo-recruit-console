@@ -54,7 +54,7 @@ export default class Select1 extends Component {
   // 点击选项
   select(option, index) {
     this.setState({value: option.value, selectIndex: index})
-    this.props.onSelect(option)
+    this.props.onSelect(option.value, option.text)
     this.close()
   }
 
@@ -123,9 +123,9 @@ export default class Select1 extends Component {
         break
       case keycode.ENTER:
         let touchIndex = this.state.touchIndex
-        let selectItems = this.props.selectItems
-        if (touchIndex >= 0 && touchIndex < selectItems.length) {
-          this.select(selectItems[touchIndex], touchIndex)
+        let options = this.props.options
+        if (touchIndex >= 0 && touchIndex < options.length) {
+          this.select(options[touchIndex], touchIndex)
         }
         break
       default:
@@ -158,7 +158,7 @@ export default class Select1 extends Component {
 
   render() {
     let selectText = '请选择'
-    this.props.selectItems.forEach(selectItem => {
+    this.props.options.forEach(selectItem => {
       if (selectItem.value == this.state.value) {
         selectText = selectItem.text
       }
@@ -168,7 +168,7 @@ export default class Select1 extends Component {
     let showSelectItems = () => {
       let currentCount = 0, filterTotalCount = 0
       try {
-        return this.props.selectItems.map((option, index) => {
+        return this.props.options.map((option, index) => {
           if (option.text.indexOf(this.state.searchKey) != -1) {
             noMatch = false
             filterTotalCount++
@@ -221,7 +221,7 @@ export default class Select1 extends Component {
           this.state.active && (
             <div className="all-select-items">
               {
-                this.props.selectItems.length > 10 && (
+                this.props.options.length > 10 && (
                   <input value={this.state.searchKey} className="search" onChange={e => this.search(e)}
                          placeholder="请输入查询条件"/>
                 )
@@ -255,7 +255,7 @@ Select1.defaultProps = {
   value: '',
   showClear: false,
   disabled: false,
-  selectItems: [],
+  options: [],
   onSelect: function () {},
   onValueChange: function () {},
   onClear: function () {}
@@ -263,7 +263,7 @@ Select1.defaultProps = {
 
 Select1.propTypes = {
   title: PropTypes.string,
-  selectItems: PropTypes.array,
+  options: PropTypes.array,
   required: PropTypes.bool,
   showClear: PropTypes.bool,
   onSelect: PropTypes.func,

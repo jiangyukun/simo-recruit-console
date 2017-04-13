@@ -9,16 +9,16 @@ import account_manage from '../containers/8-account-manage/account_manage'
 import {routerReducer as routing} from 'react-router-redux'
 
 /**
- * 使用immutable，将state封装为iState，不可变数据
+ * 使用immutable，将reducer的state封装为iState，不可变数据
  * @param reducerFun 原reducer函数
  * @return 封装后的reducer函数
  */
-const wrapState = reducerFun => (state, action) => {
+const wrapReducerState = reducerFun => (state, action) => {
   const iState = fromJS(state)
-  return unwrapState(state, iState, reducerFun(iState, action))
+  return unwrapReducerState(state, iState, reducerFun(iState, action))
 }
 
-function unwrapState(state, iState, nextIState) {
+function unwrapReducerState(state, iState, nextIState) {
   if (iState === nextIState) {
     return state
   }
@@ -26,7 +26,7 @@ function unwrapState(state, iState, nextIState) {
 }
 
 export default combineReducers({
-  _app: wrapState(_app),
-  account_manage: wrapState(account_manage),
+  _app: wrapReducerState(_app),
+  account_manage: wrapReducerState(account_manage),
   routing
 })

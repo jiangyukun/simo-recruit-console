@@ -9,5 +9,6 @@ export const FAILURE = '_FAILURE'
 export default {
   START: '_START',
   SUCCESS: '_SUCCESS',
-  FAILURE: '_FAILURE'
+  FAILURE: '_FAILURE',
+  CLEAR: 'CLEAR_'
 }

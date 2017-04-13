@@ -14,5 +14,6 @@ function generatorValueFromKey(prefix, obj) {
 export const app = generatorValueFromKey('APP', {})
 
 export const accountManage = generatorValueFromKey('ACCOUNT_MANAGE', {
-  FETCH_LIST: null
+  FETCH_LIST: null,
+  ADD_ACCOUNT: null,
 })

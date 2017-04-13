@@ -4,12 +4,13 @@
 import {fromJS} from 'immutable'
 import {accountManage} from '../../core/constants/types'
 import phase from '../../core/constants/phase'
-import {updateList, handleCommonState} from '../../core/util/reducer-utils'
+import {updateList, handleCommonState, handleClear} from '../../core/util/reducer-utils'
 
 const initValue = {
   hasMore: true,
   list: [],
-  loading: false
+  loading: false,
+  addAccountSuccess: false
 }
 
 export default function account_manage(iState = fromJS(initValue), action) {
@@ -21,7 +22,11 @@ export default function account_manage(iState = fromJS(initValue), action) {
       nextIState = updateList(iState, list => list.concat(action.list)).set('hasMore', action.hasMore)
       break
 
-  }
+    case accountManage.ADD_ACCOUNT + phase.SUCCESS:
+      nextIState = iState.set('addAccountSuccess', true)
+      break
 
+  }
+  nextIState = handleClear(action, accountManage.ADD_ACCOUNT, 'addAccountSuccess', nextIState)
   return handleCommonState(action, accountManage.FETCH_LIST, nextIState)
 }
