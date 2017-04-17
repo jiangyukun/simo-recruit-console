@@ -1,46 +1,22 @@
 /**
  * Created by jiangyukun on 2017/4/12.
  */
-
-export function calculatePageIndex(pageTotal, currentPage) {
-  let i, j, pageToShowLength = 5
-  let beforeCount = 4, afterCount, current = currentPage
-  let pages = []
-
-  if (typeof pageTotal != 'number' || pageTotal < 1) {
-    return []
+/**
+ * 获取FilterItem的item参数对象
+ * @param typeCode
+ * @param typeText
+ * @param typeItemList
+ * @returns {{typeCode: *, typeText: *, typeItemList: *}}
+ */
+export function getFilterItem(typeCode, typeText, typeItemList) {
+  if (!typeItemList) {
+    typeItemList = [
+      {value: constants.yesOrNo.yes, text: '是'}, {value: constants.yesOrNo.no, text: '否'}
+    ]
   }
-  else if (pageTotal == 1) {
-    return [1]
+  return {
+    typeCode: typeCode,
+    typeText: typeText,
+    typeItemList: typeItemList
   }
-  pages.push(1)
-
-  let start = current - beforeCount
-  if (start < 2) {
-    start = 2
-    beforeCount = current - 2
-    if (beforeCount < 0) {
-      beforeCount = 0
-    }
-  } else if (start > 2) {
-    pages.push('...')
-  }
-  for (i = start; i <= current; i++) {
-    pages.push(i)
-  }
-  afterCount = pageToShowLength - beforeCount
-  for (i = current + 1, j = 0; i < pageTotal; i++) {
-    if (j > afterCount) {
-      if (i != pageTotal - 1) {
-        pages.push('...')
-      }
-      break
-    }
-    pages.push(i)
-    j++
-  }
-  if (current != pageTotal) {
-    pages.push(pageTotal)
-  }
-  return pages
 }

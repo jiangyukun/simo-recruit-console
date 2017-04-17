@@ -16,4 +16,11 @@ export const app = generatorValueFromKey('APP', {})
 export const accountManage = generatorValueFromKey('ACCOUNT_MANAGE', {
   FETCH_LIST: null,
   ADD_ACCOUNT: null,
+  EDIT_ACCOUNT: null,
+  RESET_PASSWORD: null,
+})
+
+export const project = generatorValueFromKey('PROJECT', {
+  FETCH_LIST: null,
+
 })

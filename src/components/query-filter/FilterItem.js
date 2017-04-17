@@ -146,7 +146,7 @@ class FilterItem extends Component {
         <li className="select-option-container filter-item-single">
           <Select1 ref={c => this._select1 = c}
                    className={classnames({'selected': this.state.selected != ''})}
-                   selectItems={item.typeItemList}
+                   options={item.typeItemList}
                    onSelect={option => this.select(option)}/>
         </li>
       )

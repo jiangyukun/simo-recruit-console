@@ -11,15 +11,18 @@ import Button from '../../components/element/Button'
 import PaginateList from '../../components/PaginateList'
 import {FlexList, FixHead, FixRow, HeadItem, RowItem, FlexBodyWrap} from '../../components/list'
 import AddAccountDialog from './dialog/AddAccountDialog'
+import EditAccountDialog from './dialog/EditAccountDialog'
 
+import {getUserType} from '../../core/formatBusData'
 import {accountManage} from '../../core/constants/types'
-import * as actions from './account-manage'
+import {fetchList, addAccount, editAccount, resetPassword} from './account-manage'
 
 class AccountManage extends React.Component {
   state = {
     index: -1,
     searchKey: '',
-    showAdd: false
+    showAdd: false,
+    showEdit: false,
   }
 
   beginFetch = (restart) => {
@@ -39,9 +42,19 @@ class AccountManage extends React.Component {
       this.props.clearState(accountManage.ADD_ACCOUNT)
       this.beginFetch(true)
     }
+    if (this.props.editAccountSuccess) {
+      this.props.clearState(accountManage.EDIT_ACCOUNT)
+      this.beginFetch()
+    }
+    if (this.props.resetPasswordSuccess) {
+      this.props.clearState(accountManage.RESET_PASSWORD)
+    }
+
   }
 
   render() {
+    const item = this.props.list[this.state.index]
+
     return (
       <div className="app-function-page">
 
@@ -54,11 +67,23 @@ class AccountManage extends React.Component {
           )
         }
 
-        <SearchBox value={this.state.searchKey} placeholder="输入分组名称"
+        {
+          this.state.showEdit && this.state.index != -1 && (
+            <EditAccountDialog
+              userInfo={item}
+              resetPassword={this.props.resetPassword}
+              editAccount={this.props.editAccount}
+              closeSignal={this.props.editAccountSuccess || this.props.resetPasswordSuccess}
+              onExited={() => this.setState({showEdit: false})}/>
+          )
+        }
+
+        <SearchBox value={this.state.searchKey} placeholder="输入关键字查询名字或邮箱"
                    onSearchKeyChange={key => this.setState({searchKey: key})}
                    beginFetch={this.beginFetch}
         >
           <Button type="add" onClick={() => this.setState({showAdd: true})}>创建账号</Button>
+          <Button type="edit" disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>编辑</Button>
         </SearchBox>
 
         <PaginateList ref={c => this._paginateList = c}
@@ -82,15 +107,15 @@ class AccountManage extends React.Component {
               {
                 this.props.list.map((item, index) => {
                   return (
-                    <FixRow key={item['user_name']}
+                    <FixRow key={item['user_id']}
                             selected={this.state.index == index}
                             onClick={() => this.setState({index})}
                             style={{minHeight: '50px'}}
                     >
                       <RowItem>{item['user_name']}</RowItem>
                       <RowItem>{item['name']}</RowItem>
-                      <RowItem>{item['user_type']}</RowItem>
-                      <RowItem>{item['user_is_working']}</RowItem>
+                      <RowItem>{getUserType(item['user_type'])}</RowItem>
+                      <RowItem>{item['user_is_working'] == '1' ? '是' : '否'}</RowItem>
                       <RowItem>{item['user_regrist_time']}</RowItem>
                     </FixRow>
                   )
@@ -114,4 +139,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, actions)(AccountManage)
+export default connect(mapStateToProps, {fetchList, addAccount, editAccount, resetPassword})(AccountManage)

@@ -23,3 +23,31 @@ body {
 .inline-block {
     display: inline-block;
 }
+
+label {
+    font-weight: normal;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex1 {
+    flex: 1;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: rgba(200, 200, 200, 0.8);
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}

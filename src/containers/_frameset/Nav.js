@@ -13,6 +13,7 @@ class Nav extends Component {
     const {SubMenu, Item} = Menu
 
     const accountManage = getPath('account-manage')
+    const project = getPath('project')
 
     return (
       <div className="app-nav-wrap">
@@ -23,10 +24,16 @@ class Nav extends Component {
                 selectedKeys={['']}
                 mode="inline"
           >
-            <Item key="1_1">
+            <Item key="1">
               <Link to={accountManage}>
                 账号管理
               </Link>
+            </Item>
+            <Item key="8">
+              <Link to={project}>
+                项目
+              </Link>
+
             </Item>
           </Menu>
         </div>

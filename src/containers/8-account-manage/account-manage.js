@@ -3,7 +3,6 @@
  */
 import {_post} from '../../services/http'
 import {accountManage} from '../../core/constants/types'
-import phase from '../../core/constants/phase'
 import {THREE_PHASE} from '../../middleware/request_3_phase'
 
 export function fetchList(options) {
@@ -31,8 +30,27 @@ export function addAccount(email, username, userType, isInOffice) {
   }
 }
 
-export function clear() {
+export function editAccount(userId, email, username, userType, isInOffice) {
+  const options = {
+    'user_id': userId,
+    'user_name': email,
+    'name': username,
+    'group_Id': userType,
+    'user_is_working': isInOffice == '1'
+  }
   return {
-    type: phase.CLEAR + accountManage.ADD_ACCOUNT
+    [THREE_PHASE]: {
+      type: accountManage.EDIT_ACCOUNT,
+      http: () => _post('/backend/user/v1/updateUserInfo', {body: options})
+    }
+  }
+}
+
+export function resetPassword() {
+  return {
+    [THREE_PHASE]: {
+      type: accountManage.RESET_PASSWORD,
+      http: () => _post('/backend/user/v1/updatePassword')
+    }
   }
 }

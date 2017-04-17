@@ -22,13 +22,6 @@ export default class Select1 extends Component {
     }
   }
 
-  getSelected() {
-    if (!this.state.value) {
-      return {}
-    }
-    return this.props.selectItems.find(item => item.value == this.state.value)
-  }
-
   toggle() {
     if (this.props.disabled) {
       return
@@ -61,7 +54,6 @@ export default class Select1 extends Component {
   // 选中值为value的选项
   activeValue(value) {
     this.setState({value})
-    this.props.onValueChange(value)
   }
 
   reset() {
@@ -146,7 +138,7 @@ export default class Select1 extends Component {
 
   componentWillReceiveProps(nextProps) {
     let nextValue = nextProps.value + ''
-    if (nextValue !== this.props.value) {
+    if (nextValue !== this.state.value) {
       this.activeValue(nextValue)
     }
   }
@@ -257,7 +249,6 @@ Select1.defaultProps = {
   disabled: false,
   options: [],
   onSelect: function () {},
-  onValueChange: function () {},
   onClear: function () {}
 }
 

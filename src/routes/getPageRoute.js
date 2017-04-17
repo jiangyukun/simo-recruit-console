@@ -10,11 +10,13 @@ import IllegalAuthority from '../containers/_frameset/IllegalAuthority'
 
 import {pageNames} from '../core/constants/page'
 import account__manage from './lazy-page/account__manage'
+import __project from './lazy-page/project'
 
 export default function getPageRoute(path, pageList) {
-  const {accountManage} = pageNames
+  const {accountManage, project} = pageNames
   const mapper = {
-    [accountManage]: account__manage(pageList, accountManage)
+    [accountManage]: account__manage(pageList, accountManage),
+    [project]: __project(pageList, project),
   }
 
   let rootPath = '/html-redirect'

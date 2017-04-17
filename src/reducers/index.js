@@ -6,6 +6,7 @@ import {combineReducers} from 'redux'
 
 import _app from './_app'
 import account_manage from '../containers/8-account-manage/account_manage'
+import _project from '../containers/1-project/_project'
 import {routerReducer as routing} from 'react-router-redux'
 
 /**
@@ -28,5 +29,6 @@ function unwrapReducerState(state, iState, nextIState) {
 export default combineReducers({
   _app: wrapReducerState(_app),
   account_manage: wrapReducerState(account_manage),
+  _project: wrapReducerState(_project),
   routing
 })

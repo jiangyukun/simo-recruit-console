@@ -1,6 +1,5 @@
 $nav-color: #1c2b36;
 
-
 .ant-menu-dark, .ant-menu-dark .ant-menu-sub {
     background: $nav-color;
 }
@@ -16,6 +15,7 @@ $nav-color: #1c2b36;
         display: flex;
 
         .app-icon {
+            font-family: "Microsoft YaHei";
             background: $nav-color;
             width: 200px;
             height: 100%;

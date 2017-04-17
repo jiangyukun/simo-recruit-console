@@ -18,6 +18,9 @@ let browserHistory = syncHistoryWithStore(useRouterHistory(createBrowserHistory)
 const pageList = [
   {
     pageName: 'account-manage'
+  },
+  {
+    pageName: 'project'
   }
 ]
 
