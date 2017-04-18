@@ -3,6 +3,16 @@
     box-sizing: border-box;
 }
 
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0;
+}
+
 html, body {
     height: 100%;
 }
@@ -30,10 +40,38 @@ label {
 
 .flex {
     display: flex;
+    &.middle {
+        align-items: center;
+    }
 }
 
 .flex1 {
     flex: 1;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.vertical-line {
+    border-left: 1px solid #c0c0c0;
+    margin-right: 10px;
+}
+
+.padding-15 {
+    padding: 0 15px;
 }
 
 ::-webkit-scrollbar {

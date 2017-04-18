@@ -1,0 +1,12 @@
+@mixin svg-bg-common() {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-size: cover;
+    vertical-align: bottom;
+}
+
+.search-btn-svg {
+    @include svg-bg-common();
+    background-image: url(../imgs/search.svg);
+}

@@ -8,7 +8,7 @@ import {useRouterHistory} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import {syncHistoryWithStore} from 'react-router-redux'
 
-import './style/'
+import '../css/'
 import configureStore from './store/configureStore'
 import Root from './containers/Root'
 

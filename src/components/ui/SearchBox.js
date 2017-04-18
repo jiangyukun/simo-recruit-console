@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import Form from '../element/Form'
 
@@ -13,13 +14,16 @@ class SearchBox extends React.Component {
       <div className="search-box">
         {this.props.children}
         <div className="search-container">
-          <Form className="inline-block" onSubmit={() => this.props.beginFetch(1)}>
+          <Form className="search-form" onSubmit={() => this.props.beginFetch(1)}>
+            <button className="search-button" onClick={() => this.props.beginFetch(1)}>
+              <i className="search-btn-svg"></i>
+            </button>
             <input value={this.props.value}
-                   className="search-box-input"
+                   className={classnames('search-box-input', this.props.size)}
                    placeholder={this.props.placeholder}
                    onChange={e => this.props.onSearchKeyChange(e.target.value)}/>
           </Form>
-          <button onClick={() => this.props.beginFetch(1)}>搜索</button>
+          <a className="search-more" onClick={this.props.onMoreChange}>更多筛选</a>
         </div>
       </div>
     )
@@ -28,8 +32,10 @@ class SearchBox extends React.Component {
 
 SearchBox.propTypes = {
   value: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'middle', 'big']),
   placeholder: PropTypes.string,
   onSearchKeyChange: PropTypes.func,
+  onMoreChange: PropTypes.func,
   beginFetch: PropTypes.func
 }
 

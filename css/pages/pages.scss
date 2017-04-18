@@ -1,0 +1,47 @@
+
+.app-function-page {
+    color: #000;
+    .search-box {
+        margin: 15px;
+    }
+
+    .search-container {
+        float: right;
+        font-size: 12px;
+
+        .search-form {
+            display: inline-block;
+            position: relative;
+        }
+
+        input {
+            border-radius: 3px;
+            padding: 5px 5px 5px 22px;
+            width: 180px;
+        }
+        .search-button {
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            background: transparent;
+            border: none;
+        }
+    }
+
+    .search-box-input {
+        border-radius: 3px;
+        background: darken(#F0F3F4, 10%);
+        border-color: transparent;
+        width: 150px;
+        outline: none;
+        &.big {
+            width: 225px;
+        }
+    }
+
+    .search-more {
+        padding: 7px 10px;
+    }
+}
+
+@import "./project.scss";

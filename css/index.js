@@ -15,6 +15,8 @@ import './antd/tooltip/style/index.less'
 import './antd/checkbox/style/index.less'
 
 import './common.scss'
+import './reset.scss'
+import './svg.scss'
 import './app.scss'
 import './components/form.scss'
 import './components/button.scss'

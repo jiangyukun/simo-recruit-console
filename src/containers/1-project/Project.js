@@ -5,37 +5,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {merge} from 'lodash'
+import classnames from 'classnames'
 
 import Button from '../../components/element/Button'
 import SearchBox from '../../components/ui/SearchBox'
 import {QueryFilter, FilterItems, FilterItem} from '../../components/query-filter/'
 import PaginateList from '../../components/PaginateList'
+import AddProject from './dialog/AddProject'
 
-import {getFilterItem} from '../../core/util/page-utils'
+import {diseaseType, crowd, instalment, status} from '../../core/pages/project'
 import {fetchList} from './-project'
 
-const list1 = getFilterItem('diseaseType', '疾病种类', [
-  {value: '1', text: '慢病'},
-  {value: '2', text: '肿瘤'},
-  {value: '3', text: '其它'},
-])
-
-const list2 = getFilterItem('diseaseType', '人群', [
-  {value: '1', text: '患者'},
-  {value: '2', text: '健康志愿者'},
-])
-
-const list3 = getFilterItem('instalment', '分期', [
-  {value: '1', text: 'BE'},
-  {value: '2', text: 'PK/PD'},
-  {value: '3', text: 'I 期'},
-  {value: '4', text: 'II 期'},
-  {value: '5', text: 'III 期'},
-  {value: '6', text: 'IV 期'},
-])
-
 class Project extends React.Component {
-  state = {}
+  state = {
+    searchMore: false,
+    showAdd: false,
+    showEdit: false,
+  }
 
   beginFetch = (restart) => {
     this._paginateList.beginFetch(restart)
@@ -52,19 +38,29 @@ class Project extends React.Component {
   render() {
     return (
       <div className="app-function-page project">
-        <QueryFilter beginFilter={this.beginFetch} show={true}>
-          <SearchBox value={this.state.searchKey} placeholder="输入关键字查询疾病、申办方或药物"
+
+        {
+          this.state.showAdd && (
+            <AddProject onExited={() => this.setState({showAdd: false})}/>
+          )
+        }
+
+        <QueryFilter beginFilter={this.beginFetch}>
+          <SearchBox value={this.state.searchKey}
+                     size="big"
+                     placeholder="输入关键字查询疾病、申办方或药物"
                      onSearchKeyChange={key => this.setState({searchKey: key})}
+                     onMoreChange={() => this.setState({searchMore: !this.state.searchMore})}
                      beginFetch={this.beginFetch}
           >
-            <Button type="add" onClick={() => this.setState({showAdd: true})}>创建账号</Button>
-            <Button type="edit" disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>编辑</Button>
+            <Button type="add" onClick={() => this.setState({showAdd: true})}>新增</Button>
           </SearchBox>
 
-          <FilterItems show={true}>
-            <FilterItem item={list1}/>
-            <FilterItem item={list2}/>
-            <FilterItem item={list3}/>
+          <FilterItems show={this.state.searchMore}>
+            <FilterItem item={diseaseType}/>
+            <FilterItem item={crowd}/>
+            <FilterItem item={instalment}/>
+            <FilterItem item={status}/>
           </FilterItems>
         </QueryFilter>
 
@@ -73,14 +69,44 @@ class Project extends React.Component {
                       doFetch={this.doFetch}
                       lengthName='limit'
         >
-          {
-            this.props.list.map((item, index) => {
-                return (
-                  <div>z</div>
-                )
-              }
-            )
-          }
+          <div className="project-list">
+            {
+              this.props.list.map((item, index) => {
+                  return (
+                    <div key={item['project_id']} className="project-item">
+                      <div className="project-item-preview">
+                        <div className="project-category-info clearfix">
+                          <div className="project-type">
+                            {item['sickness_type']}
+                          </div>
+                          <div className="project-category-name">
+                            {item['sickness_name']}
+                          </div>
+                          <div className={classnames('project-status', item['sickness_status'] ? 'ongoing' : 'closed')}>
+                            {item['sickness_status'] ? '进行中' : '已结束'}
+                          </div>
+                        </div>
+                        <div className="project-content">
+                          {item['experiment_title']}
+                        </div>
+                        <div className="project-desc clearfix">
+                          <div className="bidding-party">
+                            申办方：{item['bid_name']}
+                          </div>
+                          <div className="research-medicine">
+                            研究药物：{item['drug_name']}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="edit-project">
+                        <Button type="edit" disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>修改</Button>
+                      </div>
+                    </div>
+                  )
+                }
+              )
+            }
+          </div>
         </PaginateList>
 
       </div>

@@ -1,0 +1,82 @@
+.project {
+    .project-list {
+        margin: 10px 15px;
+    }
+
+    .project-item {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #c0c0c0;
+        border-radius: 8px;
+
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+
+        .project-item-preview {
+            flex: 1;
+            padding: 15px;
+            .project-category-info {
+                .project-type, .project-category-name, .project-status {
+                    display: inline-block;
+                }
+
+                .project-type {
+                    background: #ccc;
+                    padding: 3px 5px;
+                    border-radius: 4px;
+                }
+                .project-category-name {
+                    margin-left: 10px;
+                }
+                .project-status {
+                    float: right;
+                    font-weight: bold;
+                    &.closed {
+                        color: #6C6C6C;
+                    }
+                    &.ongoing {
+                        color: #2C962C;
+                    }
+                }
+            }
+
+            .project-category {
+            }
+
+            .project-content {
+                margin-top: 10px;
+                color: #333333;
+            }
+
+            .project-desc {
+                margin-top: 10px;
+                color: #666666;
+                .bidding-party {
+                    float: left;
+                }
+                .research-medicine {
+                    float: right;
+                }
+            }
+        }
+
+        .edit-project {
+            border-left: 1px solid #c0c0c0;
+            height: 100%;
+            width: 150px;
+            text-align: center;
+        }
+    }
+}
+
+.summary-form, .research-introduce-form, .condition-form, .project-center-form, .patient-benefit-form, .attachment-form {
+    padding: 15px 0;
+
+    .form-item:not(:first-child) {
+        margin-top: 10px;
+        border-top: 1px solid #eee;
+        padding-top: 10px;
+    }
+}

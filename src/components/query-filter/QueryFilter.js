@@ -9,10 +9,8 @@ import {merge} from 'lodash'
 class QueryFilter extends Component {
   constructor() {
     super()
-
     this.state = {filterConditions: []}
   }
-
 
   clearAllFilterCondition() {
     this.state.filterConditions.forEach(filterCondition => filterCondition.filterItem.reset())

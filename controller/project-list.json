@@ -1,0 +1,55 @@
+{
+  "statusCode": 0,
+  "statusMessage": "",
+  "data": {
+    "hasMore": false,
+    "list": [
+      {
+        "project_id": "170324033459870251",
+        "sickness_name": "活动性类风湿关节炎",
+        "sickness_type": "慢病",
+        "sickness_status": false,
+        "drug_name": "阿巴西普",
+        "bid_name": "江苏先声药业有限公司",
+        "experiment_title": "在甲氨蝶呤（MTX）疗效不佳的活动性类风湿关节炎中国患者中在甲氨蝶呤疗效不佳的活动性类风湿关节炎中国在甲氨蝶呤（MTX）疗效不佳的活动性类风..."
+      },
+      {
+        "project_id": "170327062233732212",
+        "sickness_name": "UI士",
+        "sickness_type": "画法几何",
+        "sickness_status": false,
+        "drug_name": "割发代首",
+        "bid_name": "该死的广泛地",
+        "experiment_title": "我问问"
+      },
+      {
+        "project_id": "170327062033117841",
+        "sickness_name": "UI士",
+        "sickness_type": "画法几何",
+        "sickness_status": false,
+        "drug_name": "割发代首",
+        "bid_name": "该死的广泛地",
+        "experiment_title": "我问问"
+      },
+      {
+        "project_id": "170329045938391656",
+        "sickness_name": "好地方",
+        "sickness_type": "割发代首",
+        "sickness_status": true,
+        "drug_name": "功夫大使馆",
+        "bid_name": "fgd",
+        "experiment_title": "换个地方"
+      },
+      {
+        "project_id": "170329045920824496",
+        "sickness_name": "好地方",
+        "sickness_type": "割发代首",
+        "sickness_status": true,
+        "drug_name": "功夫大使馆",
+        "bid_name": "fgd",
+        "experiment_title": "换个地方"
+      }
+    ]
+  },
+  "timestamp": 1492507194727
+}
