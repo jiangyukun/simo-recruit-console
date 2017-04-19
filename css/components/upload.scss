@@ -1,0 +1,70 @@
+//新增
+
+.add-file {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.file-trigger {
+    width: 100px;
+    height: 100px;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 28px;
+    color: #999;
+}
+
+.file-upload-tip {
+    position: absolute;
+    text-align: center;
+    color: #aaa;
+    top: 70%;
+    font-size: 14px;
+    left: 0;
+    right: 0;
+}
+
+.image-preview {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    left: 0;
+    right: 0;
+
+    img {
+        max-width: 100%;
+        opacity: 0.5;
+    }
+}
+
+//已上传
+
+.uploaded-file {
+    float: left;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}
+
+.remove-uploaded-file {
+    position: absolute;
+    cursor: pointer;
+    top: 5px;
+    right: 15px;
+}
+
+.uploaded-file-type-icon {
+    margin: 0 auto;
+    width: 60px;
+}
+
+.uploaded-file-name {
+    margin-top: 10px;
+    text-align: center;
+}

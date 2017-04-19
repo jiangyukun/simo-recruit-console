@@ -42,9 +42,6 @@
                 }
             }
 
-            .project-category {
-            }
-
             .project-content {
                 margin-top: 10px;
                 color: #333333;
@@ -80,3 +77,33 @@
         padding-top: 10px;
     }
 }
+
+.research-introduce-form {
+    .rich-text-container {
+        margin-top: 10px;
+
+        pre {
+            min-height: 60px;
+            white-space: pre-wrap;
+        }
+    }
+}
+
+.attachment-form {
+    .add-center-icon {
+        padding: 15px 10px;
+        width: 60px;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+    .remove-center-icon {
+        cursor: pointer;
+    }
+
+    .attachment-container {
+        padding: 15px;
+    }
+
+}
+
