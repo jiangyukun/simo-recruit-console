@@ -19,7 +19,7 @@ export function getPath(page) {
     path = 'inline/'
   }
   if (process.env.NODE_ENV == 'dev') {
-    path = 'dev/'
+    path = '/dev/'
   }
 
   return prefix + path + page

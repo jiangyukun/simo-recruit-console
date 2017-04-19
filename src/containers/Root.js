@@ -3,21 +3,34 @@
  */
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Router} from 'react-router'
+import {ConnectedRouter} from 'react-router-redux'
 import {Provider} from 'react-redux'
-import getRoutes from '../routes/routes'
+
+import PageRoute from '../routes/PageRoute'
 
 class Root extends Component {
   render() {
     return (
       <Provider store={this.props.store}>
-        <Router routes={getRoutes(this.props.pageList)} history={this.props.history}/>
+        <ConnectedRouter history={this.props.history}>
+          <PageRoute pageList={this.props.pageList}/>
+        </ConnectedRouter>
       </Provider>
     )
+  }
+
+  getChildContext() {
+    return {
+      pageList: this.props.pageList
+    }
   }
 }
 
 Root.propTypes = {
+  pageList: PropTypes.array
+}
+
+Root.childContextTypes = {
   pageList: PropTypes.array
 }
 

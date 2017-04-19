@@ -10,18 +10,21 @@ import PageContent from './PageContent'
 
 class SimoRecruitApp extends Component {
   render() {
+
     return (
       <div className="app">
         <Header/>
         <div className="app-body">
           <Nav/>
-          <PageContent>{this.props.children}</PageContent>
+          <PageContent match={this.props.match}>{this.props.children}</PageContent>
         </div>
       </div>
     )
   }
 }
 
-SimoRecruitApp.propTypes = {}
+SimoRecruitApp.propTypes = {
+  match: PropTypes.object
+}
 
 export default SimoRecruitApp

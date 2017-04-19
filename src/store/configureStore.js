@@ -3,11 +3,14 @@
  */
 import {createStore, applyMiddleware} from 'redux'
 import request_3_phase from '../middleware/request_3_phase'
+import {ConnectedRouter, routerReducer, routerMiddleware, push} from 'react-router-redux'
 
 import allReducers from '../reducers/'
 
-export default function configureStore() {
-  const store = createStore(allReducers, {}, applyMiddleware(request_3_phase))
+export default function configureStore(history) {
+
+  const middleware = routerMiddleware(history)
+  const store = createStore(allReducers, {}, applyMiddleware(request_3_phase, middleware))
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

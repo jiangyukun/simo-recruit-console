@@ -6,10 +6,10 @@ const bodyParser = require('body-parser')
 
 const express = require('express')
 
-const configController = require('./z-controller')
+// const configController = require('./z-controller')
 
 const app = new express()
-const port = 3000
+const port = 3011
 
 const compiler = webpack(config)
 app.use(bodyParser.urlencoded({extended: false}))
@@ -23,20 +23,13 @@ function toIndex(req, res) {
     res.sendFile(__dirname + '/index.html')
 }
 
-app.get('/dev/node-auditing', toIndex)
-app.get('/dev/laboratory-sheet', toIndex)
-app.get('/dev/patient-situation-statistics', toIndex)
-app.get('/dev/hospital-manage', toIndex)
-app.get('/dev/patient-edit', toIndex)
-app.get('/dev/doctor-auditing', toIndex)
-app.get('/dev/take-medicine-record', toIndex)
-app.get('/dev/out-patient-time', toIndex)
-app.get('/dev/app-update', toIndex)
-app.get('/dev/todo-work-track', toIndex)
-app.get('/dev/smart-analytic-system', toIndex)
+app.get('/dev/index', toIndex)
+app.get('/dev/account-manage', toIndex)
+app.get('/dev/project', toIndex)
 
 
-configController(app)
+
+// configController(app)
 
 app.listen(port, function (error) {
     if (error) {

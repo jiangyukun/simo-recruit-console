@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import {Link, routerShape} from 'react-router'
+import {Link} from 'react-router-dom'
 import Menu from 'antd/lib/menu'
 
 import {getPath} from '../../core/env'
@@ -40,10 +40,6 @@ class Nav extends Component {
       </div>
     )
   }
-}
-
-Nav.contextTypes = {
-  router: routerShape
 }
 
 Nav.propTypes = {
