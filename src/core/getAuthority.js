@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux'
 
 import {clearState} from '../actions/app'
-import {getIsCanEdit, getIsCanExport} from '../core/authority'
+import {getIsCanEdit, getIsCanExport} from './authority'
 
 export default function getAuthority(pageList, currentPageName, Component) {
   let isCanEdit = getIsCanEdit(pageList, currentPageName)

@@ -1,7 +1,7 @@
 /**
  * Created by jiangyukun on 2017/3/17.
  */
-import getAuthority from '../getAuthority'
+import getAuthority from '../../core/getAuthority'
 
 export default function getRoute(pageList, pageName) {
   return function node__auditing(nextState, cb) {

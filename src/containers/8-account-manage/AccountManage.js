@@ -21,6 +21,7 @@ class AccountManage extends React.Component {
   state = {
     index: -1,
     searchKey: '',
+    moreSearch: false,
     showAdd: false,
     showEdit: false,
   }
@@ -80,10 +81,11 @@ class AccountManage extends React.Component {
 
         <SearchBox value={this.state.searchKey} placeholder="输入关键字查询名字或邮箱"
                    onSearchKeyChange={key => this.setState({searchKey: key})}
+                   showMore={false}
                    beginFetch={this.beginFetch}
         >
           <Button type="add" onClick={() => this.setState({showAdd: true})}>创建账号</Button>
-          <Button type="edit" disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>编辑</Button>
+          <Button type="edit" className="ml-10" disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>编辑</Button>
         </SearchBox>
 
         <PaginateList ref={c => this._paginateList = c}

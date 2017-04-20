@@ -20,20 +20,21 @@ class Nav extends Component {
         <div className="app-nav">
           <div className="navigate-title">导航</div>
           <Menu theme="dark"
+                className="mt-15"
                 defaultOpenKeys={[]}
                 selectedKeys={['']}
                 mode="inline"
           >
-            <Item key="1">
-              <Link to={accountManage}>
-                账号管理
-              </Link>
-            </Item>
             <Item key="8">
               <Link to={project}>
                 项目
               </Link>
+            </Item>
 
+            <Item key="1">
+              <Link to={accountManage}>
+                账号管理
+              </Link>
             </Item>
           </Menu>
         </div>

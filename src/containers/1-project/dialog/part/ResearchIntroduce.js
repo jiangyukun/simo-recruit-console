@@ -4,21 +4,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Radio from 'antd/lib/Radio'
+import {Editor, EditorState} from 'draft-js'
 
+import {form2} from '../input-name'
 import {FlexDiv, Part} from '../../../../components/layout/'
 
 class ResearchIntroduce extends React.Component {
-  constructor(props) {
-    super()
-    this.state = {
-      title: props.title,
-      crowd: props.crowd,
-      instalment: props.instalment,
-      richText1: props.richText1,
-      richText2: props.richText2
-    }
-  }
-
   render() {
     return (
       <div className="form research-introduce-form">
@@ -26,14 +17,14 @@ class ResearchIntroduce extends React.Component {
           <Part>试验标题（最多500汉字）：</Part>
           <Part>
             <textarea className="input" rows="3"
-                      value={this.state.title} onChange={e => this.setState({title: e.target.value})}></textarea>
+                      value={this.props.title} onChange={e => this.props.onChange(e.target.value, form2.title)}></textarea>
           </Part>
         </FlexDiv>
 
         <FlexDiv className="form-item">
           <Part>人群：</Part>
           <Part textAlign="right">
-            <Radio.Group value={this.state.crowd} onChange={e => this.setState({crowd: e.target.value})}>
+            <Radio.Group value={this.props.crowd} onChange={e => this.props.onChange(e.target.value, form2.crowd)}>
               <Radio value="患者" className="positive">患者</Radio>
               <span className="vertical-line"></span>
               <Radio value="健康志愿者" className="negative">健康志愿者</Radio>
@@ -44,7 +35,7 @@ class ResearchIntroduce extends React.Component {
         <FlexDiv className="form-item">
           <Part>试验分期：</Part>
           <Part weight={4} textAlign="right">
-            <Radio.Group value={this.state.instalment} onChange={e => this.setState({instalment: e.target.value})}>
+            <Radio.Group value={this.props.instalment} onChange={e => this.props.onChange(e.target.value, form2.instalment)}>
               <Radio value="BE" className="positive">BE</Radio>
               <span className="vertical-line"></span>
               <Radio value="PK/PD" className="negative">PK/PD</Radio>
@@ -62,17 +53,15 @@ class ResearchIntroduce extends React.Component {
         <div className="form-item">
           <div>研究设计：</div>
           <div className="rich-text-container">
-            <pre contentEditable={true} className="input"
-                 value={this.state.richText1} onChange={e => this.setState({richText1: e.target.value})}>
-            </pre>
+            <Editor editorState={this.props.richText1} onChange={editorState => this.props.onChange(editorState, form2.richText1)}/>
           </div>
         </div>
 
         <div className="form-item">
           <div>试验流程：</div>
           <div className="rich-text-container">
-            <pre contentEditable={true} className="input"
-                 value={this.state.richText2} onChange={e => this.setState({richText2: e.target.value})}></pre>
+            <Editor editorState={this.props.richText2}
+                    onChange={editorState => this.props.onChange(editorState, form2.richText2)}/>
           </div>
         </div>
       </div>
@@ -92,6 +81,7 @@ ResearchIntroduce.propTypes = {
   title: PropTypes.string,
   crowd: PropTypes.string,
   instalment: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 export default ResearchIntroduce

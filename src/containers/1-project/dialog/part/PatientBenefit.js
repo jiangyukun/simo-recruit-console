@@ -4,18 +4,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import {form5} from '../input-name'
 import {FlexDiv, Part} from '../../../../components/layout/'
 
 class PatientBenefit extends React.Component {
-  constructor(props) {
-    super()
-    this.state = {
-      checkItem: props.checkItem,
-      subsidy: props.subsidy,
-      other: props.other,
-    }
-  }
-
   render() {
     return (
       <div className="form patient-benefit-form">
@@ -23,7 +15,7 @@ class PatientBenefit extends React.Component {
           <Part>检查项目（最多500汉字）：</Part>
           <Part>
             <textarea rows="5" className="input" placeholder="请输入检查项目"
-                      value={this.state.checkItem} onChange={e => this.setState({checkItem: e.target.value})}></textarea>
+                      value={this.props.checkItem} onChange={e => this.props.onChange(e.target.value, form5.checkItem)}></textarea>
           </Part>
         </FlexDiv>
 
@@ -31,7 +23,7 @@ class PatientBenefit extends React.Component {
           <Part>补贴金额（最多500汉字）：</Part>
           <Part>
             <textarea rows="5" className="input" placeholder="请输入补贴金额"
-                      value={this.state.subsidy} onChange={e => this.setState({subsidy: e.target.value})}></textarea>
+                      value={this.props.subsidy} onChange={e => this.props.onChange(e.target.value, form5.subsidy)}></textarea>
           </Part>
         </FlexDiv>
 
@@ -39,7 +31,7 @@ class PatientBenefit extends React.Component {
           <Part>其它获益（最多500汉字）：</Part>
           <Part>
             <textarea rows="5" className="input" placeholder="请输入其它获益"
-                      value={this.state.other} onChange={e => this.setState({other: e.target.value})}></textarea>
+                      value={this.props.other} onChange={e => this.props.onChange(e.target.value, form5.other)}></textarea>
           </Part>
         </FlexDiv>
       </div>
@@ -57,6 +49,7 @@ PatientBenefit.propTypes = {
   checkItem: PropTypes.string,
   subsidy: PropTypes.string,
   other: PropTypes.string,
+  onChange: PropTypes.func,
 }
 
 export default PatientBenefit

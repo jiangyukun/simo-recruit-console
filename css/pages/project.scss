@@ -90,16 +90,6 @@
 }
 
 .attachment-form {
-    .add-center-icon {
-        padding: 15px 10px;
-        width: 60px;
-        margin: 0 auto;
-        cursor: pointer;
-    }
-
-    .remove-center-icon {
-        cursor: pointer;
-    }
 
     .attachment-container {
         padding: 15px;
@@ -107,3 +97,15 @@
 
 }
 
+.project-center-form {
+    .remove-center-icon {
+        cursor: pointer;
+    }
+
+    .add-center-icon {
+        padding: 15px 10px;
+        width: 60px;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+}

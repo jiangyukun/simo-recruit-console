@@ -5,37 +5,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import {form4} from '../input-name'
+import {copyList} from '../../../../core/util/common'
 import {FlexDiv, Part} from '../../../../components/layout/'
 
 class ProjectCenter extends React.Component {
-  constructor(props) {
-    super()
-    this.state = {
-      centerList: props.centerList
-    }
-  }
-
   addItem = () => {
-    const centerList = this.state.centerList
-    centerList.push({
-      cityName: '',
-      centerName: '',
-      PI: '',
-      status: '',
-    })
-    this.setState({centerList})
+    const centerList = copyList(this.props.centerList)
+    centerList.push({cityName: '', centerName: '', PI: '', status: ''})
+    this.props.onChange(centerList, form4.centerList)
   }
 
   removeCenter = (index) => {
-    const centerList = this.state.centerList
+    const centerList = copyList(this.props.centerList)
     centerList.splice(index, 1)
-    this.setState({centerList})
+    this.props.onChange(centerList, form4.centerList)
   }
 
   handleCenterItemChange = (e, index, key) => {
-    const centerList = this.state.centerList
+    const centerList = copyList(this.props.centerList)
     centerList[index][key] = e.target.value
-    this.setState({centerList})
+    this.props.onChange(centerList, form4.centerList)
   }
 
   render() {
@@ -43,14 +33,14 @@ class ProjectCenter extends React.Component {
       <div className="form project-center-form">
         <FlexDiv className="form-item">
           <Part weight={2} textAlign="center">城市</Part>
-          <Part weight={2} textAlign="center">中心名</Part>
+          <Part weight={4} textAlign="center">中心名</Part>
           <Part weight={2} textAlign="center">PI</Part>
           <Part weight={2} textAlign="center">启动状态</Part>
           <Part></Part>
         </FlexDiv>
 
         {
-          this.state.centerList.map((center, index) => {
+          this.props.centerList.map((center, index) => {
             return (
               <FlexDiv key={index} className="form-item">
                 <Part weight={2}>
@@ -59,7 +49,7 @@ class ProjectCenter extends React.Component {
                            value={center.cityName} onChange={(e) => this.handleCenterItemChange(e, index, 'cityName')}/>
                   </div>
                 </Part>
-                <Part weight={2}>
+                <Part weight={4}>
                   <div className="padding-15">
                     <input className="input"
                            value={center.centerName} onChange={(e) => this.handleCenterItemChange(e, index, 'centerName')}/>
@@ -99,7 +89,8 @@ ProjectCenter.defaultProps = {
 }
 
 ProjectCenter.propTypes = {
-  centerList: PropTypes.array
+  centerList: PropTypes.array,
+  onChange: PropTypes.func,
 }
 
 export default ProjectCenter

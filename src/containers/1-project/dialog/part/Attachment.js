@@ -5,26 +5,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import AddFile from '../../../../components/file/AddFile'
 
-import {FlexDiv, Part} from '../../../../components/layout/'
+import {copyList} from '../../../../core/util/common'
+import {form6} from '../input-name'
 
 class Attachment extends React.Component {
-  constructor(props) {
-    super()
-    this.state = {
-      fileList: props.fileList
-    }
-  }
-
   handleFileUploaded = (fileInfo) => {
-    const fileList = this.state.fileList
+    const fileList = copyList(this.props.fileList)
     fileList.push(fileInfo)
-    this.setState({fileList})
+    this.props.onChange(fileList, form6.fileList)
   }
 
   removeFile = index => {
-    const fileList = this.state.fileList
+    const fileList = copyList(this.props.fileList)
     fileList.splice(index, 1)
-    this.setState({fileList})
+    this.props.onChange(fileList, form6.fileList)
   }
 
   render() {
@@ -33,7 +27,7 @@ class Attachment extends React.Component {
         <div>上传附件（最多10个）：</div>
         <div className="attachment-container">
           {
-            this.state.fileList.map((fileInfo, index) => {
+            this.props.fileList.map((fileInfo, index) => {
               if (fileInfo.fileType == 'png') {
 
               }
@@ -58,13 +52,12 @@ class Attachment extends React.Component {
 }
 
 Attachment.defaultProps = {
-  fileList: [
-    {fileName: 'a', fileUrl: 'a', fileType: 'png'},
-  ]
+  fileList: []
 }
 
 Attachment.propTypes = {
-  fileList: PropTypes.array
+  fileList: PropTypes.array,
+  onChange: PropTypes.func,
 }
 
 export default Attachment

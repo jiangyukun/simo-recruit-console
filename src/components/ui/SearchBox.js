@@ -23,7 +23,11 @@ class SearchBox extends React.Component {
                    placeholder={this.props.placeholder}
                    onChange={e => this.props.onSearchKeyChange(e.target.value)}/>
           </Form>
-          <a className="search-more" onClick={this.props.onMoreChange}>更多筛选</a>
+          {
+            this.props.showMore && (
+              <a className="search-more" onClick={this.props.onMoreChange}>更多筛选</a>
+            )
+          }
         </div>
       </div>
     )
@@ -35,6 +39,7 @@ SearchBox.propTypes = {
   size: PropTypes.oneOf(['small', 'middle', 'big']),
   placeholder: PropTypes.string,
   onSearchKeyChange: PropTypes.func,
+  showMore: PropTypes.bool,
   onMoreChange: PropTypes.func,
   beginFetch: PropTypes.func
 }

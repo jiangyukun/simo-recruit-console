@@ -49,6 +49,7 @@ class Project extends React.Component {
           <SearchBox value={this.state.searchKey}
                      size="big"
                      placeholder="输入关键字查询疾病、申办方或药物"
+                     showMore={true}
                      onSearchKeyChange={key => this.setState({searchKey: key})}
                      onMoreChange={() => this.setState({searchMore: !this.state.searchMore})}
                      beginFetch={this.beginFetch}

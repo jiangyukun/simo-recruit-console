@@ -9,8 +9,8 @@ import IndexPage from './IndexPage'
 import IllegalAuthority from './IllegalAuthority'
 
 import {pageNames} from '../../core/constants/page'
-import account__manage from '../../routes/lazy-page/account__manage'
-import __project from '../../routes/lazy-page/project'
+import account__manage from './page/account__manage'
+import __project from './page/project'
 
 class PageContent extends Component {
   render() {
@@ -30,7 +30,7 @@ class PageContent extends Component {
           pageList.map(page => {
             const pageName = page['pageName']
             return (
-              <Route key={pageName} path={`${match.url}/${pageName}`} getComponent={mapper[pageName]}/>
+              <Route key={pageName} path={`${match.url}/${pageName}`} component={mapper[pageName]}/>
             )
           })
         }
