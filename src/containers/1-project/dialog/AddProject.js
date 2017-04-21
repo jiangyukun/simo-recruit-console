@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import Modal from 'react-bootstrap/lib/Modal'
 import Tabs from 'react-bootstrap/lib/Tabs'
 import Tab from 'react-bootstrap/lib/Tab'
-import {EditorState, ContentState} from 'draft-js'
+import {EditorState, ContentState, convertToRaw} from 'draft-js'
 
 import Button from '../../../components/element/Button'
 import Summary from './part/Summary'
@@ -16,12 +16,11 @@ import ProjectCenter from './part/ProjectCenter'
 import PatientBenefit from './part/PatientBenefit'
 import Attachment from './part/Attachment'
 
-let rich = '<img src="http://localhost:9999/pictures/search.svg"/>'
-
 class AddProject extends React.Component {
   state = {
     show: true,
     valid: false,
+    currentTab: 2,
 
     diseaseName: '肝癌',
     diseaseType: '慢病',
@@ -32,8 +31,8 @@ class AddProject extends React.Component {
     title: '1',
     crowd: '患者',
     instalment: 'BE',
-    richText1: EditorState.createWithContent(ContentState.createFromText(rich)),
-    richText2: EditorState.createWithContent(ContentState.createFromText(rich)),
+    richText1: EditorState.createWithContent(ContentState.createFromText('')),
+    richText2: EditorState.createWithContent(ContentState.createFromText('')),
 
     include: '1',
     exclude: '1',
@@ -48,6 +47,10 @@ class AddProject extends React.Component {
     fileList: [{fileName: 'a', fileUrl: 'a', fileType: 'png'}],
   }
 
+  handleSelect = (key) => {
+    this.setState({currentTab: key})
+  }
+
   close = () => {
     this.setState({show: false})
   }
@@ -56,6 +59,10 @@ class AddProject extends React.Component {
     let valid = true
 
     Object.keys(this.state).forEach(key => {
+      if (key == 'show' || key == 'valid' || key == 'currentTab') {
+        return
+      }
+
       const value = this.state[key]
       if (typeof value == 'string' && !this.state[key]) {
         valid = false
@@ -65,9 +72,13 @@ class AddProject extends React.Component {
       }
       if (value instanceof EditorState) {
         let v = value.toJS()
-        if (v.selection.hasFocus) {
-          console.log(v.selection)
-        }
+
+        // let blocks = value.getCurrentContent().getBlocksAsArray()
+        // console.log(blocks[0])
+        console.log(convertToRaw(value.getCurrentContent()))
+        /*if (v.selection.hasFocus) {
+         console.log(v.selection)
+         }*/
       }
     })
 
@@ -98,7 +109,7 @@ class AddProject extends React.Component {
           <Modal.Title>新建项目</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Tabs id="tabs" activeKey={this.state.key} onSelect={this.handleSelect}>
+          <Tabs id="tabs" activeKey={this.state.currentTab} onSelect={this.handleSelect}>
             <Tab title="简介" eventKey={1}>
               <Summary diseaseName={diseaseName}
                        diseaseType={diseaseType}

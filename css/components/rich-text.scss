@@ -1,0 +1,25 @@
+
+.DraftEditor-root {
+    //background-color: #f5f5f5;
+    //border: 1px solid #c0c0c0;
+
+    .public-DraftEditor-content {
+        padding: 10px;
+        min-height: 60px;
+    }
+}
+
+.rich-text {
+    font-family: Georgia, serif;
+
+    .editor {
+        background-color: #f5f5f5;
+        border: 1px solid #c0c0c0;
+        border-radius: 5px;
+        cursor: text;
+    }
+
+    .rich-text-image {
+        max-width: 100%;
+    }
+}

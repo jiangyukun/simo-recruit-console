@@ -1,12 +1,13 @@
 /**
  * Created by jiangyukun on 2016/12/23.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
+import PropTypes  from 'prop-types'
 import Upload from 'antd/lib/upload'
 
 import {upload} from './file-ajax'
 
-class FileUpload extends Component {
+class FileUpload extends React.Component {
   beforeUpload = (file) => {
     return status == 0
   }
@@ -26,6 +27,7 @@ class FileUpload extends Component {
   render() {
     return (
       <Upload className={this.props.className}
+              accept={this.props.accept}
               showUploadList={false}
               beforeUpload={this.beforeUpload}
               customRequest={this.customRequest}
@@ -38,10 +40,13 @@ class FileUpload extends Component {
 }
 
 FileUpload.defaultProps = {
+  accept: '*',
   onFileUploadFailure: () => {}
 }
 
 FileUpload.propTypes = {
+  className: PropTypes.string,
+  accept: PropTypes.string,
   onFileUploadSuccess: PropTypes.func.isRequired,
   onFileUploadFailure: PropTypes.func
 }

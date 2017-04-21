@@ -19,7 +19,7 @@ import {fetchList} from './-project'
 class Project extends React.Component {
   state = {
     searchMore: false,
-    showAdd: false,
+    showAdd: true,
     showEdit: false,
   }
 

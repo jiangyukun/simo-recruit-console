@@ -6,8 +6,10 @@ import PropTypes from 'prop-types'
 import Radio from 'antd/lib/Radio'
 import {Editor, EditorState} from 'draft-js'
 
-import {form2} from '../input-name'
+import RichText from '../../../../components/txt/RichText'
 import {FlexDiv, Part} from '../../../../components/layout/'
+
+import {form2} from '../input-name'
 
 class ResearchIntroduce extends React.Component {
   render() {
@@ -53,15 +55,14 @@ class ResearchIntroduce extends React.Component {
         <div className="form-item">
           <div>研究设计：</div>
           <div className="rich-text-container">
-            <Editor editorState={this.props.richText1} onChange={editorState => this.props.onChange(editorState, form2.richText1)}/>
+            <RichText editorState={this.props.richText1} onChange={editorState => this.props.onChange(editorState, form2.richText1)}/>
           </div>
         </div>
 
         <div className="form-item">
           <div>试验流程：</div>
           <div className="rich-text-container">
-            <Editor editorState={this.props.richText2}
-                    onChange={editorState => this.props.onChange(editorState, form2.richText2)}/>
+            <RichText editorState={this.props.richText2} onChange={editorState => this.props.onChange(editorState, form2.richText2)}/>
           </div>
         </div>
       </div>
