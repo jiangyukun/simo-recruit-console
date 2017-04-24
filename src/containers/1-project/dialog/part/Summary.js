@@ -37,9 +37,9 @@ class Summary extends React.Component {
           <Part>状态：</Part>
           <Part textAlign="right">
             <Radio.Group value={this.props.projectStatus} onChange={e => this.props.onChange(e.target.value, form1.projectStatus)}>
-              <Radio value="1" className="positive">进行中</Radio>
+              <Radio value="进行中" className="positive">进行中</Radio>
               <span className="vertical-line"></span>
-              <Radio value="0" className="negative">已结束</Radio>
+              <Radio value="已结束" className="negative">已结束</Radio>
             </Radio.Group>
           </Part>
         </FlexDiv>

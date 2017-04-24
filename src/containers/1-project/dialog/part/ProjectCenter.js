@@ -6,19 +6,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import {form4} from '../input-name'
+import crud from '../../../../core/constants/crud'
 import {copyList} from '../../../../core/util/common'
 import {FlexDiv, Part} from '../../../../components/layout/'
 
 class ProjectCenter extends React.Component {
   addItem = () => {
     const centerList = copyList(this.props.centerList)
-    centerList.push({cityName: '', centerName: '', PI: '', status: ''})
+    centerList.push({cityName: '', centerName: '', PI: '', status: '', crud: crud.ADD})
     this.props.onChange(centerList, form4.centerList)
   }
 
   removeCenter = (index) => {
     const centerList = copyList(this.props.centerList)
-    centerList.splice(index, 1)
+    centerList[index].crud = crud.DELETE
     this.props.onChange(centerList, form4.centerList)
   }
 
@@ -41,6 +42,9 @@ class ProjectCenter extends React.Component {
 
         {
           this.props.centerList.map((center, index) => {
+            if (center.crud == crud.DELETE) {
+              return null
+            }
             return (
               <FlexDiv key={index} className="form-item">
                 <Part weight={2}>

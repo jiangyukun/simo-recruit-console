@@ -12,10 +12,10 @@ export function getPath(page) {
   let path = ''
   let prefix = ''
   if (process.env.NODE_ENV == 'production') {
-    prefix = '/html-redirect/'
+    prefix = '/simo-recruit-console/'
   }
   if (process.env.NODE_ENV == 'inline') {
-    prefix = '/html-redirect/'
+    prefix = '/simo-recruit-console/'
     path = 'inline/'
   }
   if (process.env.NODE_ENV == 'dev') {

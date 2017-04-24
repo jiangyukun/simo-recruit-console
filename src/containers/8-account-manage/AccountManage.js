@@ -15,7 +15,7 @@ import EditAccountDialog from './dialog/EditAccountDialog'
 
 import {getUserType} from '../../core/formatBusData'
 import {accountManage} from '../../core/constants/types'
-import {fetchList, addAccount, editAccount, resetPassword} from './account-manage'
+import {fetchList, addAccount, editAccount, resetPassword} from './account-manage.action'
 
 class AccountManage extends React.Component {
   state = {

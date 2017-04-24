@@ -22,5 +22,8 @@ export const accountManage = generatorValueFromKey('ACCOUNT_MANAGE', {
 
 export const project = generatorValueFromKey('PROJECT', {
   FETCH_LIST: null,
+  ADD_PROJECT: null,
+  FETCH_PROJECT_INFO: null,
+  EDIT_PROJECT: null,
 
 })

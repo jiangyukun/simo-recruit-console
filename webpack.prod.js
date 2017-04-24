@@ -5,14 +5,14 @@ process.env.NODE_ENV = 'production'
 
 module.exports = {
   entry: [
-    './src/boot/index.js'
+    './src/index.js'
   ],
 
   output: {
     // path: 'D:/2017/company/app-parent/backed-web/src/main/webapp/platform-new/build/',
     path: __dirname + '/build/prod/',
     filename: 'bundle-' + moment().format('MMDD') + '.min.js',
-    publicPath: '/backend/platform-new/build/',
+    publicPath: '/simo-recruit-console/build/',
     chunkFilename: '[name].[chunkhash:5].chunk.js'
   },
 

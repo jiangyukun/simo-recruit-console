@@ -16,37 +16,37 @@ import ProjectCenter from './part/ProjectCenter'
 import PatientBenefit from './part/PatientBenefit'
 import Attachment from './part/Attachment'
 
-import crud, {fileCrud} from '../../../core/constants/crud'
+import curd, {fileCrud} from '../../../core/constants/crud'
 
-class AddProject extends React.Component {
+class EditProject extends React.Component {
   state = {
     show: true,
     valid: false,
-    currentTab: 2,
+    currentTab: 1,
 
-    diseaseName: '肝癌',
-    diseaseType: '慢病',
-    projectStatus: '进行中',
-    researchMedicine: '1',
-    biddingParty: '1',
+    diseaseName: '',
+    diseaseType: '',
+    projectStatus: '',
+    researchMedicine: '',
+    biddingParty: '',
 
-    title: '1',
-    crowd: '患者',
-    instalment: 'BE',
+    title: '',
+    crowd: '',
+    instalment: '',
     richText1: EditorState.createWithContent(ContentState.createFromText('')),
     richText2: EditorState.createWithContent(ContentState.createFromText('')),
 
-    include: '1',
-    exclude: '1',
-    important: '1',
+    include: '',
+    exclude: '',
+    important: '',
 
-    centerList: [{cityName: '杭州', centerName: '南方医科大学附属南方医院', PI: '刘志华', status: '已启动', crud: crud.ADD}],
+    centerList: [],
 
-    checkItem: '1',
-    subsidy: '1',
-    other: '1',
+    checkItem: '',
+    subsidy: '',
+    other: '',
 
-    fileList: [{fileName: 'a', fileUrl: 'a', fileType: 'png', crud: fileCrud.ADD}],
+    fileList: [],
   }
 
   handleSelect = (key) => {
@@ -77,13 +77,6 @@ class AddProject extends React.Component {
         if (!richText || !richText.trim()) {
           valid = false
         }
-
-        // let blocks = value.getCurrentContent().getBlocksAsArray()
-        // console.log(blocks[0])
-        // console.log(convertToRaw(value.getCurrentContent()))
-        /*if (v.selection.hasFocus) {
-         console.log(v.selection)
-         }*/
       }
     })
 
@@ -96,8 +89,58 @@ class AddProject extends React.Component {
     this.setState({[type]: value}, this.checkValid)
   }
 
-  add = () => {
-    this.props.add(this.state)
+  edit = () => {
+    this.props.edit(this.props.projectId, this.state)
+  }
+
+  componentDidMount() {
+    this.props.fetchProjectInfo(this.props.projectId)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const projectInfo = nextProps.projectInfo || {}
+    // console.log(projectInfo)
+
+    const centerList = projectInfo['list'].map(center => ({
+      cityName: center['city'],
+      centerName: center['center_name'],
+      PI: center['pi'],
+      status: center['started_status'],
+      crud: curd.UPDATE
+    }))
+
+    const fileList = projectInfo['file_list'].map(fileInfo => ({
+      fileUrl: fileInfo['file_url'],
+      fileName: fileInfo['file_name'],
+      fileType: fileInfo['file_type'],
+      crud: fileCrud.DEFAULT
+    }))
+
+    this.setState({
+      diseaseName: projectInfo['sickness_name'],
+      diseaseType: projectInfo['sickness_type'],
+      projectStatus: projectInfo['sickness_status'],
+      researchMedicine: projectInfo['drug_name'],
+      biddingParty: projectInfo['bid_name'],
+
+      title: projectInfo['experiment_title'],
+      crowd: projectInfo['people_group'],
+      instalment: projectInfo['experimental_stage'],
+      richText1: EditorState.createWithContent(ContentState.createFromText(projectInfo['study_design'] || '')),
+      richText2: EditorState.createWithContent(ContentState.createFromText(projectInfo['test_flow'] || '')),
+
+      include: projectInfo['inclusion_criteria'],
+      exclude: projectInfo['exclude_criteria'],
+      important: projectInfo['point_criteria'],
+
+      centerList: centerList,
+
+      checkItem: projectInfo['check_project'],
+      subsidy: projectInfo['subsidy_amount'],
+      other: projectInfo['other_benefit'],
+
+      fileList: fileList,
+    })
   }
 
   render() {
@@ -115,7 +158,7 @@ class AddProject extends React.Component {
              onExited={this.props.onExited}
       >
         <Modal.Header closeButton={true}>
-          <Modal.Title>新建项目</Modal.Title>
+          <Modal.Title>编辑项目</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Tabs id="tabs" activeKey={this.state.currentTab} onSelect={this.handleSelect}>
@@ -165,12 +208,12 @@ class AddProject extends React.Component {
         <Modal.Footer>
           <div className="button-group">
             <div className="button-item">
-              <Button type="full closed" onClick={this.close}>取消</Button>
+              <Button type="full closed" onClick={this.close}>删除</Button>
             </div>
             <div className="button-item">
-              <Button type="full" onClick={this.add}
+              <Button type="full" onClick={this.edit}
                       disabled={!this.state.valid}>
-                创建
+                保存
               </Button>
             </div>
           </div>
@@ -180,9 +223,12 @@ class AddProject extends React.Component {
   }
 }
 
-AddProject.propTypes = {
-  add: PropTypes.func,
+EditProject.propTypes = {
+  projectId: PropTypes.string,
+  fetchProjectInfo: PropTypes.func,
+  projectInfo: PropTypes.object,
+  edit: PropTypes.func,
   onExited: PropTypes.func
 }
 
-export default AddProject
+export default EditProject

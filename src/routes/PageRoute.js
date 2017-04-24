@@ -13,9 +13,11 @@ class PageRoute extends React.Component {
 
     let rootPath = ''
     if (process.env.NODE_ENV == 'inline') {
-      rootPath += '/html-redirect/inline/'
+      rootPath = '/simo-recruit-console/inline/'
     } else if (process.env.NODE_ENV == 'dev') {
       rootPath = '/dev'
+    } else if (process.env.NODE_ENV == 'production') {
+      rootPath = '/simo-recruit-console'
     }
 
     return (

@@ -12,14 +12,16 @@ import SearchBox from '../../components/ui/SearchBox'
 import {QueryFilter, FilterItems, FilterItem} from '../../components/query-filter/'
 import PaginateList from '../../components/PaginateList'
 import AddProject from './dialog/AddProject'
+import EditProject from './dialog/EditProject'
 
 import {diseaseType, crowd, instalment, status} from '../../core/pages/project'
-import {fetchList} from './-project'
+import {fetchList, add, edit, fetchProjectInfo} from './project.action'
 
 class Project extends React.Component {
   state = {
+    index: -1,
     searchMore: false,
-    showAdd: true,
+    showAdd: false,
     showEdit: false,
   }
 
@@ -36,12 +38,27 @@ class Project extends React.Component {
   }
 
   render() {
+    const item = this.props.list[this.state.index]
+
     return (
       <div className="app-function-page project">
 
         {
           this.state.showAdd && (
-            <AddProject onExited={() => this.setState({showAdd: false})}/>
+            <AddProject
+              add={this.props.add}
+              onExited={() => this.setState({showAdd: false})}/>
+          )
+        }
+
+        {
+          this.state.showEdit && this.state.index != -1 && (
+            <EditProject
+              projectId={item['project_id']}
+              fetchProjectInfo={this.props.fetchProjectInfo}
+              projectInfo={this.props.projectInfo}
+              edit={this.props.edit}
+              onExited={() => this.setState({showEdit: false})}/>
           )
         }
 
@@ -100,7 +117,7 @@ class Project extends React.Component {
                         </div>
                       </div>
                       <div className="edit-project">
-                        <Button type="edit" disabled={this.state.index == -1} onClick={() => this.setState({showEdit: true})}>修改</Button>
+                        <Button type="edit" onClick={() => this.setState({showEdit: true, index})}>修改</Button>
                       </div>
                     </div>
                   )
@@ -109,7 +126,6 @@ class Project extends React.Component {
             }
           </div>
         </PaginateList>
-
       </div>
     )
   }
@@ -125,4 +141,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {fetchList})(Project)
+export default connect(mapStateToProps, {fetchList, add, edit, fetchProjectInfo})(Project)

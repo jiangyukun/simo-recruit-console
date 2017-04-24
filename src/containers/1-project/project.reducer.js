@@ -10,7 +10,7 @@ const initValue = {
   hasMore: true,
   list: [],
   loading: false,
-
+  projectInfo: {}
 }
 
 export default function _project(iState = fromJS(initValue), action) {
@@ -20,6 +20,10 @@ export default function _project(iState = fromJS(initValue), action) {
 
     case project.FETCH_LIST + phase.SUCCESS:
       nextIState = updateList(iState, list => list.concat(action.list)).set('hasMore', action.hasMore)
+      break
+
+    case project.FETCH_PROJECT_INFO + phase.SUCCESS:
+      nextIState = iState.set('projectInfo', action.projectInfo)
       break
 
 

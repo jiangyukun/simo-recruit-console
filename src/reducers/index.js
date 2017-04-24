@@ -4,9 +4,9 @@
 import {fromJS} from 'immutable'
 import {combineReducers} from 'redux'
 
-import _app from './_app'
-import account_manage from '../containers/8-account-manage/account_manage'
-import _project from '../containers/1-project/_project'
+import _app from './app.reducer'
+import account_manage from '../containers/8-account-manage/account_manage.reducer'
+import _project from '../containers/1-project/project.reducer'
 import {routerReducer} from 'react-router-redux'
 
 /**

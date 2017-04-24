@@ -5,19 +5,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import AddFile from '../../../../components/file/AddFile'
 
-import {copyList} from '../../../../core/util/common'
 import {form6} from '../input-name'
+import {fileCrud} from '../../../../core/constants/crud'
+import {copyList} from '../../../../core/util/common'
 
 class Attachment extends React.Component {
   handleFileUploaded = (fileInfo) => {
     const fileList = copyList(this.props.fileList)
-    fileList.push(fileInfo)
+    fileList.push({
+      ...fileInfo, crud: fileCrud.ADD
+    })
     this.props.onChange(fileList, form6.fileList)
   }
 
   removeFile = index => {
     const fileList = copyList(this.props.fileList)
-    fileList.splice(index, 1)
+    fileList[index].crud = fileCrud.DELETE
     this.props.onChange(fileList, form6.fileList)
   }
 
@@ -28,6 +31,9 @@ class Attachment extends React.Component {
         <div className="attachment-container">
           {
             this.props.fileList.map((fileInfo, index) => {
+              if (fileInfo.crud == fileCrud.DELETE) {
+                return
+              }
               if (fileInfo.fileType == 'png') {
 
               }
