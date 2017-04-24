@@ -20,6 +20,9 @@ const pageList = [
   },
   {
     pageName: 'project'
+  },
+  {
+    pageName: 'question-answer'
   }
 ]
 

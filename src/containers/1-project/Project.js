@@ -137,7 +137,7 @@ Project.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    ...state['_project']
+    ...state['project']
   }
 }
 

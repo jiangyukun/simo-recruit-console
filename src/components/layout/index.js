@@ -3,3 +3,4 @@
  */
 export FlexDiv from './FlexDiv'
 export Part from './Part'
+export Width from './Width'

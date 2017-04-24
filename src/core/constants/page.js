@@ -3,5 +3,6 @@
  */
 export const pageNames = {
   accountManage: 'account-manage',
-  project: 'project'
+  project: 'project',
+  questionAnswer: 'question-answer'
 }

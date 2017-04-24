@@ -4,9 +4,11 @@
 import {fromJS} from 'immutable'
 import {combineReducers} from 'redux'
 
-import _app from './app.reducer'
+import app from './app.reducer'
 import account_manage from '../containers/8-account-manage/account_manage.reducer'
-import _project from '../containers/1-project/project.reducer'
+import project from '../containers/1-project/project.reducer'
+import question_answer from '../containers/3-question-answer/question-answer.reducer'
+
 import {routerReducer} from 'react-router-redux'
 
 /**
@@ -27,8 +29,10 @@ function unwrapReducerState(state, iState, nextIState) {
 }
 
 export default combineReducers({
-  _app: wrapReducerState(_app),
+  app: wrapReducerState(app),
   account_manage: wrapReducerState(account_manage),
-  _project: wrapReducerState(_project),
+  project: wrapReducerState(project),
+  question_answer: wrapReducerState(question_answer),
+
   router: routerReducer
 })

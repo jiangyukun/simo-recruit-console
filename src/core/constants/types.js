@@ -27,3 +27,10 @@ export const project = generatorValueFromKey('PROJECT', {
   EDIT_PROJECT: null,
 
 })
+
+export const questionAnswer = generatorValueFromKey('QUESTION_ANSWER', {
+  FETCH_LIST: null,
+  UPDATE: null,
+  DELETE: null,
+
+})

@@ -9,18 +9,20 @@ import IndexPage from './IndexPage'
 import IllegalAuthority from './IllegalAuthority'
 
 import {pageNames} from '../../core/constants/page'
-import account__manage from './page/account__manage'
 import __project from './page/project'
+import question__answer from './page/question__answer'
+import account__manage from './page/account__manage'
 
 class PageContent extends Component {
   render() {
     const pageList = this.context.pageList
     const {match} = this.props
 
-    const {accountManage, project} = pageNames
+    const {accountManage, project, questionAnswer} = pageNames
     const mapper = {
-      [accountManage]: account__manage(pageList, accountManage),
       [project]: __project(pageList, project),
+      [questionAnswer]: question__answer(pageList, questionAnswer),
+      [accountManage]: account__manage(pageList, accountManage),
     }
 
     return (
