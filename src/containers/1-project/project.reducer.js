@@ -10,7 +10,10 @@ const initValue = {
   hasMore: true,
   list: [],
   loading: false,
-  projectInfo: {}
+  projectInfo: {},
+  addProjectSuccess: false,
+  updateProjectSuccess: false,
+  deleteProjectSuccess: false
 }
 
 export default function _project(iState = fromJS(initValue), action) {
@@ -26,11 +29,24 @@ export default function _project(iState = fromJS(initValue), action) {
       nextIState = iState.set('projectInfo', action.projectInfo)
       break
 
+    case project.ADD_PROJECT + phase.SUCCESS:
+      nextIState = iState.set('addProjectSuccess', true)
+      break
+
+    case project.EDIT_PROJECT + phase.SUCCESS:
+      nextIState = iState.set('updateProjectSuccess', true)
+      break
+
+    case project.DELETE_PROJECT + phase.SUCCESS:
+      nextIState = iState.set('deleteProjectSuccess', true)
+      break
 
     default:
       break
 
   }
-
+  nextIState = handleClear(action, project.ADD_PROJECT, 'addProjectSuccess', nextIState)
+  nextIState = handleClear(action, project.EDIT_PROJECT, 'updateProjectSuccess', nextIState)
+  nextIState = handleClear(action, project.DELETE_PROJECT, 'deleteProjectSuccess', nextIState)
   return handleCommonState(action, project.FETCH_LIST, nextIState)
 }

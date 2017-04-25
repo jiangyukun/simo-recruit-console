@@ -49,6 +49,15 @@ export function edit(projectId, state) {
   }
 }
 
+export function deleteProject(projectId) {
+  return {
+    [THREE_PHASE]: {
+      type: project.DELETE_PROJECT,
+      http: () => _get(`/backend/project/v1/deleteProjectById/${projectId}`)
+    }
+  }
+}
+
 function _handleAddOption(state) {
   const centerList = state.centerList.filter(center => center.crud == crud.ADD).map(center => ({
     city: center['cityName'],
@@ -57,7 +66,7 @@ function _handleAddOption(state) {
     started_status: center['status'],
   }))
 
-  const fileList = state.fileList.filter(file => file.crud != fileCrud.DELETE).map(file => ({
+  const fileList = state.fileList.filter(file => file.crud == fileCrud.ADD).map(file => ({
     file_name: file['fileName'],
     file_type: file['fileType'],
     file_url: file['fileUrl'],
@@ -71,7 +80,8 @@ function _handleAddOption(state) {
 }
 
 function _handleEditOption(projectId, state) {
-  const centerList = state.centerList.map(center => ({
+  const centerList = state.centerList.filter(center => center.crud != crud.DEFAULT).map(center => ({
+    project_center_id: center['id'],
     city: center['cityName'],
     center_name: center['centerName'],
     pi: center['PI'],
@@ -80,6 +90,7 @@ function _handleEditOption(projectId, state) {
   }))
 
   const fileList = state.fileList.filter(file => file.crud == fileCrud.ADD || file.crud == fileCrud.DELETE).map(file => ({
+    file_id: file['fileId'],
     file_name: file['fileName'],
     file_type: file['fileType'],
     file_url: file['fileUrl'],
@@ -112,11 +123,9 @@ function _handleCommonOption(state) {
     'exclude_criteria': state.exclude,
     'point_criteria': state.important,
 
-
     'check_project': state.checkItem,
     'subsidy_amount': state.subsidy,
     'other_benefit': state.other,
-
 
   }
 }

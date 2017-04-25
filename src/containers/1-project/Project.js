@@ -15,7 +15,8 @@ import AddProject from './dialog/AddProject'
 import EditProject from './dialog/EditProject'
 
 import {diseaseType, crowd, instalment, status} from '../../core/pages/project'
-import {fetchList, add, edit, fetchProjectInfo} from './project.action'
+import {project} from '../../core/constants/types'
+import {fetchList, add, edit, fetchProjectInfo, deleteProject} from './project.action'
 
 class Project extends React.Component {
   state = {
@@ -37,6 +38,18 @@ class Project extends React.Component {
     this.beginFetch()
   }
 
+  componentDidUpdate() {
+    if (this.props.addProjectSuccess) {
+      this.props.clearState(project.ADD_PROJECT)
+    }
+    if (this.props.updateProjectSuccess) {
+      this.props.clearState(project.EDIT_PROJECT)
+    }
+    if (this.props.deleteProjectSuccess) {
+      this.props.clearState(project.DELETE_PROJECT)
+    }
+  }
+
   render() {
     const item = this.props.list[this.state.index]
 
@@ -47,7 +60,11 @@ class Project extends React.Component {
           this.state.showAdd && (
             <AddProject
               add={this.props.add}
-              onExited={() => this.setState({showAdd: false})}/>
+              closeSignal={this.props.addProjectSuccess}
+              onExited={() => {
+                this.setState({showAdd: false, index: -1})
+                this.beginFetch(true)
+              }}/>
           )
         }
 
@@ -58,7 +75,12 @@ class Project extends React.Component {
               fetchProjectInfo={this.props.fetchProjectInfo}
               projectInfo={this.props.projectInfo}
               edit={this.props.edit}
-              onExited={() => this.setState({showEdit: false})}/>
+              deleteProject={this.props.deleteProject}
+              closeSignal={this.props.updateProjectSuccess || this.props.deleteProjectSuccess}
+              onExited={() => {
+                this.setState({showEdit: false, index: -1})
+                this.beginFetch()
+              }}/>
           )
         }
 
@@ -117,7 +139,9 @@ class Project extends React.Component {
                         </div>
                       </div>
                       <div className="edit-project">
-                        <Button type="edit" onClick={() => this.setState({showEdit: true, index})}>修改</Button>
+                        <div className="center-block">
+                          <Button type="default" onClick={() => this.setState({showEdit: true, index})}>修改</Button>
+                        </div>
                       </div>
                     </div>
                   )
@@ -141,4 +165,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {fetchList, add, edit, fetchProjectInfo})(Project)
+export default connect(mapStateToProps, {fetchList, add, edit, fetchProjectInfo, deleteProject})(Project)

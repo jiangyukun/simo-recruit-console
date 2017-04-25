@@ -25,6 +25,7 @@ export const project = generatorValueFromKey('PROJECT', {
   ADD_PROJECT: null,
   FETCH_PROJECT_INFO: null,
   EDIT_PROJECT: null,
+  DELETE_PROJECT: null,
 
 })
 

@@ -6,10 +6,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {merge} from 'lodash'
 
-import {FlexDiv, Part, Width} from '../../components/layout/'
 import SearchBox from '../../components/ui/SearchBox'
 import Button from '../../components/element/Button'
 import PaginateList from '../../components/PaginateList'
+import QuestionAnswerItem from './part/QuestionAnswerItem'
 
 import {fetchList} from './question-answer.action'
 
@@ -49,33 +49,28 @@ class QuestionAnswer extends React.Component {
                       lengthName='limit'
         >
           <div className="list-container">
-
             <div className="recommend-list">
               <header>推荐</header>
               {
                 this.props.recommendList.map((item, index) => {
                   return (
-                    <div key={item['question_id']} className="list-item">
-                      <FlexDiv>
-                        <Part>
-                          xx
-                        </Part>
-                        <Width width="150px">
-                          xx
-                        </Width>
-                      </FlexDiv>
-                    </div>
+                    <QuestionAnswerItem key={item['question_id']} item={item}/>
                   )
                 })
               }
             </div>
 
-            <div>
-              {
-                this.props.list.map((item, index) => {
-                  return null
-                })
-              }
+            <div className="mt-30">
+              <header>全部</header>
+              <div>
+                {
+                  this.props.list.map((item, index) => {
+                    return (
+                      <QuestionAnswerItem key={item['question_id']} item={item}/>
+                    )
+                  })
+                }
+              </div>
             </div>
 
           </div>

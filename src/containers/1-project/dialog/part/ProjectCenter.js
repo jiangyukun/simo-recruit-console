@@ -25,7 +25,11 @@ class ProjectCenter extends React.Component {
 
   handleCenterItemChange = (e, index, key) => {
     const centerList = copyList(this.props.centerList)
-    centerList[index][key] = e.target.value
+    const center = centerList[index]
+    center[key] = e.target.value
+    if (center.crud == crud.DEFAULT) {
+      center.crud = crud.UPDATE
+    }
     this.props.onChange(centerList, form4.centerList)
   }
 

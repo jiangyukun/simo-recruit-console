@@ -1,14 +1,19 @@
+
+@import '../variables.scss';
+
 .project {
+    .button {
+        font-size: 12px;
+    }
     .project-list {
-        margin: 10px 15px;
+        margin: 30px;
     }
 
     .project-item {
         display: flex;
-        align-items: center;
         background: #fff;
-        border: 1px solid #c0c0c0;
-        border-radius: 8px;
+        border: $border;
+        border-radius: 6px;
 
         &:not(:first-child) {
             margin-top: 10px;
@@ -60,10 +65,10 @@
         }
 
         .edit-project {
-            border-left: 1px solid #c0c0c0;
-            height: 100%;
-            width: 150px;
-            text-align: center;
+            border-left: 1px solid #ddd;
+            width: 120px;
+            display: flex;
+            align-items: center;
         }
     }
 }

@@ -31,6 +31,8 @@ class AddAccountDialog extends React.Component {
     isInOffice: ''
   }
 
+  closeType = 'default'
+
   close = () => {
     this.setState({show: false})
   }
@@ -41,6 +43,7 @@ class AddAccountDialog extends React.Component {
 
   componentDidUpdate() {
     if (this.props.closeSignal) {
+      this.closeType = 'add'
       this.close()
     }
   }
@@ -50,7 +53,7 @@ class AddAccountDialog extends React.Component {
       <Modal show={this.state.show}
              backdrop="static"
              onHide={this.close}
-             onExited={this.props.onExited}
+             onExited={() => this.props.onExited(this.closeType)}
       >
         <Modal.Header closeButton={true}>
           <Modal.Title>新建账号</Modal.Title>

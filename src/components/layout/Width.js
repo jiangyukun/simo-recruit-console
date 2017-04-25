@@ -7,8 +7,9 @@ import PropTypes from 'prop-types'
 class Width extends React.Component {
 
   render() {
+    const {width, otherProps} = this.props
     return (
-      <div style={{width: this.props.width}}>
+      <div style={{width}} {...otherProps}>
         {this.props.children}
       </div>
     )
@@ -16,7 +17,8 @@ class Width extends React.Component {
 }
 
 Width.propTypes = {
-  width: PropTypes.string
+  width: PropTypes.string,
+  className: PropTypes.string,
 }
 
 export default Width

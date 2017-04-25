@@ -100,6 +100,12 @@ class AddProject extends React.Component {
     this.props.add(this.state)
   }
 
+  componentDidUpdate() {
+    if (this.props.closeSignal) {
+      this.close()
+    }
+  }
+
   render() {
     const {diseaseName, diseaseType, projectStatus, researchMedicine, biddingParty} = this.state
     const {title, crowd, instalment, richText1, richText2} = this.state
@@ -182,6 +188,7 @@ class AddProject extends React.Component {
 
 AddProject.propTypes = {
   add: PropTypes.func,
+  closeSignal: PropTypes.bool,
   onExited: PropTypes.func
 }
 

@@ -93,26 +93,31 @@ class EditProject extends React.Component {
     this.props.edit(this.props.projectId, this.state)
   }
 
+  deleteProject = () => {
+    this.props.deleteProject(this.props.projectId)
+  }
+
   componentDidMount() {
     this.props.fetchProjectInfo(this.props.projectId)
   }
 
   componentWillReceiveProps(nextProps) {
     const projectInfo = nextProps.projectInfo || {}
-    // console.log(projectInfo)
 
     const centerList = projectInfo['list'].map(center => ({
-      cityName: center['city'],
-      centerName: center['center_name'],
-      PI: center['pi'],
-      status: center['started_status'],
-      crud: curd.UPDATE
+      id: center['project_center_id'],
+      cityName: center['city'] || '',
+      centerName: center['center_name'] || '',
+      PI: center['pi'] || '',
+      status: center['started_status'] || '',
+      crud: curd.DEFAULT
     }))
 
     const fileList = projectInfo['file_list'].map(fileInfo => ({
-      fileUrl: fileInfo['file_url'],
-      fileName: fileInfo['file_name'],
-      fileType: fileInfo['file_type'],
+      fileId: fileInfo['file_id'],
+      fileUrl: fileInfo['file_url'] || '',
+      fileName: fileInfo['file_name'] || '',
+      fileType: fileInfo['file_type'] || '',
       crud: fileCrud.DEFAULT
     }))
 
@@ -141,6 +146,12 @@ class EditProject extends React.Component {
 
       fileList: fileList,
     })
+  }
+
+  componentDidUpdate() {
+    if (this.props.closeSignal) {
+      this.close()
+    }
   }
 
   render() {
@@ -208,7 +219,7 @@ class EditProject extends React.Component {
         <Modal.Footer>
           <div className="button-group">
             <div className="button-item">
-              <Button type="full closed" onClick={this.close}>删除</Button>
+              <Button type="full closed" onClick={this.deleteProject}>删除</Button>
             </div>
             <div className="button-item">
               <Button type="full" onClick={this.edit}
@@ -228,6 +239,8 @@ EditProject.propTypes = {
   fetchProjectInfo: PropTypes.func,
   projectInfo: PropTypes.object,
   edit: PropTypes.func,
+  deleteProject: PropTypes.func,
+  closeSignal: PropTypes.bool,
   onExited: PropTypes.func
 }
 

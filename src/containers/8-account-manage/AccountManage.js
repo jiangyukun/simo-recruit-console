@@ -34,6 +34,20 @@ class AccountManage extends React.Component {
     this.props.fetchList(merge({}, this._paginateList.getParams(), {"key_Words": this.state.searchKey}))
   }
 
+  closeAddDialog = type => {
+    this.setState({showEdit: false})
+    if (type == 'add') {
+      this.beginFetch()
+    }
+  }
+
+  closeEditDialog = type => {
+    this.setState({showEdit: false})
+    if (type == 'edit') {
+      this.beginFetch()
+    }
+  }
+
   componentDidMount() {
     this.beginFetch()
   }
@@ -41,16 +55,13 @@ class AccountManage extends React.Component {
   componentDidUpdate() {
     if (this.props.addAccountSuccess) {
       this.props.clearState(accountManage.ADD_ACCOUNT)
-      this.beginFetch(true)
     }
     if (this.props.editAccountSuccess) {
       this.props.clearState(accountManage.EDIT_ACCOUNT)
-      this.beginFetch()
     }
     if (this.props.resetPasswordSuccess) {
       this.props.clearState(accountManage.RESET_PASSWORD)
     }
-
   }
 
   render() {
@@ -64,7 +75,7 @@ class AccountManage extends React.Component {
             <AddAccountDialog
               addAccount={this.props.addAccount}
               closeSignal={this.props.addAccountSuccess}
-              onExited={() => this.setState({showAdd: false})}/>
+              onExited={this.closeAddDialog}/>
           )
         }
 
@@ -75,7 +86,7 @@ class AccountManage extends React.Component {
               resetPassword={this.props.resetPassword}
               editAccount={this.props.editAccount}
               closeSignal={this.props.editAccountSuccess || this.props.resetPasswordSuccess}
-              onExited={() => this.setState({showEdit: false})}/>
+              onExited={this.closeEditDialog}/>
           )
         }
 

@@ -9,10 +9,9 @@ class Part extends React.Component {
 
   render() {
     const style = {}
-    style.flex = this.props.weight
-    style.textAlign = this.props.textAlign
-
-    const {weight, textAlign, otherProps} = this.props
+    const {weight, textAlign, ...otherProps} = this.props
+    style.flex = weight
+    style.textAlign = textAlign
 
     return (
       <div style={style} {...otherProps}>

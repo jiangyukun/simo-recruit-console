@@ -3,13 +3,14 @@
  */
 
 export default {
-  ADD: 1,
-  UPDATE: 2,
-  DELETE: 3
+  DEFAULT: -1,
+  ADD: '1',
+  UPDATE: '2',
+  DELETE: '3'
 }
 
 export const fileCrud = {
-  ADD: 1,
-  DELETE: 2,
-  DEFAULT: -1
+  DEFAULT: -1,
+  ADD: '1',
+  DELETE: '2',
 }
