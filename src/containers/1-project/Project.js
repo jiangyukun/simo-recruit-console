@@ -9,7 +9,7 @@ import classnames from 'classnames'
 
 import Button from '../../components/element/Button'
 import SearchBox from '../../components/ui/SearchBox'
-import {QueryFilter, FilterItem, SelectedFilter, SelectedItem} from '../../components/query-filter/'
+import {FilterItem, SelectedFilter, SelectedItem} from '../../components/query-filter/'
 import PaginateList from '../../components/PaginateList'
 import AddProject from './dialog/AddProject'
 import EditProject from './dialog/EditProject'
