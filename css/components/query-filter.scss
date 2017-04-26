@@ -1,49 +1,25 @@
+$border-color: #dce0e6;
+
 .query-filter {
     color: #737373;
-    padding: 0 15px;
+    padding: 0 30px;
     margin-top: 30px;
-
-    &.hide-search-input .group-input {
-        visibility: hidden;
-    }
-
-    &.big {
-        .group-input {
-            input {
-                width: 150px;
-            }
-        }
-    }
-
-    .group-tools:after {
-        clear: both;
-        display: block;
-        height: 0;
-        content: '';
-    }
-
-    button.icon-search-btn {
-        float: left;
-        margin-top: 3px;
-        border: none;
-        background: url(../../imgs/search-btn.png) no-repeat;
-    }
 
     .group-tools {
         color: #737373;
         padding: 15px 30px;
         position: relative;
 
+        &:after {
+            clear: both;
+            display: block;
+            height: 0;
+            content: '';
+        }
+
         a {
             color: #5a78b7;
             text-decoration: none;
-        }
-
-        .group-select-more button {
-            cursor: pointer;
-            outline: 0;
-            background-color: #2b77e5;
-            border-radius: 2px;
         }
     }
 
@@ -81,11 +57,18 @@
         margin-bottom: 10px;
     }
 
-    .group-select-more {
+    .more-filter {
         padding-top: 15px;
         clear: both;
         border: 1px solid #dce0e6;
+        border-bottom: 0;
 
+        button {
+            cursor: pointer;
+            outline: 0;
+            background-color: #2b77e5;
+            border-radius: 2px;
+        }
         & > ul {
             padding: 0 20px 5px 20px;
         }
@@ -133,82 +116,6 @@
             border-radius: 2px;
         }
 
-        .group-select-more-btm {
-            display: flex;
-            border-top: 1px solid #dce0e6;
-            padding: 13px 20px;
-            line-height: 27px;
-
-            div.select-result {
-                width: 150px;
-            }
-
-            div.select-result button {
-                width: 56px;
-                height: 29px;
-                cursor: pointer;
-                margin-left: 6px;
-            }
-
-            div.select-result .clear {
-                border: 2px solid #2b77e5;
-                color: #2b77e5;
-                background-color: #fff;
-            }
-
-            div.select-result .submit {
-                border: 2px solid #2b77e5;
-                color: #fff;
-                background-color: #2b77e5;
-            }
-
-            div.select-result .disabled {
-                border: 2px solid #d4d7dc;
-                background-color: #d4d7dc;
-                color: #fff;
-            }
-
-            a.select-result {
-                float: left;
-                border: 1px solid #2b77e5;
-                display: block;
-                padding: 0 5px;
-                height: 27px;
-                margin-left: 10px;
-                margin-bottom: 7px;
-            }
-
-            a.select-result.invalidate {
-                border: 1px solid red;
-            }
-
-            a.select-result span {
-                float: left;
-                color: #000;
-            }
-
-            a.select-result i.icon-close {
-                margin-top: 8px;
-                margin-left: 5px;
-                float: left;
-                display: block;
-            }
-
-            a.select-result:hover {
-                border-color: red;
-            }
-
-            a.select-result:hover span {
-                color: red;
-            }
-
-            a.select-result:hover i.icon-close, .icon-close-red1 {
-                background-position: 0 -148px;
-                height: 11px;
-                width: 11px;
-            }
-        }
-
         .filter-item-warning {
             float: left;
             margin-top: 6px;
@@ -218,49 +125,61 @@
 
     }
 
+    &.big-label .more-filter .filter-item-label label {
+        width: 85px;
+        display: block;
+    }
+
+    &.ex-big-label .more-filter .filter-item-label label {
+        width: 110px;
+        display: block;
+    }
+
     .icon-search-btn {
         background-position: 0 -1638px;
         height: 18px;
         width: 17px;
     }
 
-    .group-search .group-select-btn {
-        margin-top: 5px;
-        display: inline-block;
-        padding-left: 20px;
-        padding-right: 10px;
-        vertical-align: top;
-    }
+    .group-search {
+        .group-select-btn {
+            margin-top: 5px;
+            display: inline-block;
+            padding-left: 20px;
+            padding-right: 10px;
+            vertical-align: top;
+        }
 
-    .group-search .selected {
-        border: 1px solid #dce0e6;
-        border-bottom: none;
-        padding-left: 10px;
-        line-height: 30px;
-        margin-top: 0;
-        margin-left: 10px;
-    }
+        .selected {
+            border: 1px solid #dce0e6;
+            border-bottom: none;
+            padding-left: 10px;
+            line-height: 30px;
+            margin-top: 0;
+            margin-left: 10px;
+            .icon-arrow-blue {
+                margin-top: 13px;
+            }
+        }
 
-    .group-search .group-select-btn span {
-        float: left;
-        cursor: pointer;
+        .group-select-btn {
+            span {
+                float: left;
+                cursor: pointer;
+            }
+            .icon-arrow-blue {
+                margin-top: 8px;
+                margin-left: 5px;
+                display: block;
+                float: left;
+            }
+        }
     }
 
     .icon-arrow-blue {
         background-position: 0 -20px;
         height: 5px;
         width: 8px;
-    }
-
-    .group-search .group-select-btn .icon-arrow-blue {
-        margin-top: 8px;
-        margin-left: 5px;
-        display: block;
-        float: left;
-    }
-
-    .group-search .selected .icon-arrow-blue {
-        margin-top: 13px;
     }
 
     .small-filter-item {
@@ -279,16 +198,6 @@
         display: inline-flex;
         width: 60%;
         min-width: 800px;
-    }
-
-    &.big-label .group-select-more .filter-item-label label {
-        width: 85px;
-        display: block;
-    }
-
-    &.ex-big-label .group-select-more .filter-item-label label {
-        width: 110px;
-        display: block;
     }
 
     .clear {
@@ -351,39 +260,80 @@
         height: 24px;
     }
 
-    /* query-filter 和 select1集成 */
+    .selected-filter {
+        display: flex;
+        border: 1px solid #dce0e6;
+        padding: 13px 20px;
+        line-height: 27px;
 
-    .select1-container {
-        margin-top: -2px;
-
-        .dropdown {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 20px;
-            height: 16px;
+        div.select-result {
+            width: 150px;
         }
 
-        &.selected .selected-item {
-            border-color: #2b77e5;
+        div.select-result button {
+            width: 56px;
+            height: 29px;
+            cursor: pointer;
+            margin-left: 6px;
         }
 
-        .selected-item {
-            height: 22px;
+        div.select-result .clear {
+            border: 2px solid #2b77e5;
+            color: #2b77e5;
+            background-color: #fff;
         }
 
-        .all-select-items {
-            top: 22px;
-            .search {
-                font-size: 12px;
-            }
-            .no-match-result {
-                font-size: 12px;
-            }
+        div.select-result .submit {
+            border: 2px solid #2b77e5;
+            color: #fff;
+            background-color: #2b77e5;
         }
 
-        .selected-item .select-item-text {
-            padding: 2px 0 0 10px;
+        div.select-result .disabled {
+            border: 2px solid #d4d7dc;
+            background-color: #d4d7dc;
+            color: #fff;
+        }
+
+        a.select-result {
+            float: left;
+            border: 1px solid #2b77e5;
+            display: block;
+            padding: 0 5px;
+            height: 27px;
+            margin-left: 10px;
+            margin-bottom: 7px;
+        }
+
+        a.select-result.invalidate {
+            border: 1px solid red;
+        }
+
+        a.select-result span {
+            float: left;
+            color: #000;
+        }
+
+        a.select-result i.icon-close {
+            margin-top: 8px;
+            margin-left: 5px;
+            float: left;
+            display: block;
+        }
+
+        a.select-result:hover {
+            border-color: red;
+        }
+
+        a.select-result:hover span {
+            color: red;
+        }
+
+        a.select-result:hover i.icon-close, .icon-close-red1 {
+            background-position: 0 -148px;
+            height: 11px;
+            width: 11px;
         }
     }
+
 }

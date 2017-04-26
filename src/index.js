@@ -4,7 +4,6 @@
 import 'babel-polyfill'
 import React from 'react'
 import {render} from 'react-dom'
-import {useRouterHistory} from 'react-router'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 import '../css/'

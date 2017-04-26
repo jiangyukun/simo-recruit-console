@@ -9,12 +9,12 @@ import classnames from 'classnames'
 
 import Button from '../../components/element/Button'
 import SearchBox from '../../components/ui/SearchBox'
-import {QueryFilter, FilterItems, FilterItem} from '../../components/query-filter/'
+import {QueryFilter, FilterItem, SelectedFilter, SelectedItem} from '../../components/query-filter/'
 import PaginateList from '../../components/PaginateList'
 import AddProject from './dialog/AddProject'
 import EditProject from './dialog/EditProject'
 
-import {diseaseType, crowd, instalment, status} from '../../core/pages/project'
+import {DISEASE_TYPE, CROWD, INSTALMENT, STATUS} from '../../core/pages/project'
 import {project} from '../../core/constants/types'
 import {fetchList, add, edit, fetchProjectInfo, deleteProject} from './project.action'
 
@@ -22,6 +22,13 @@ class Project extends React.Component {
   state = {
     index: -1,
     searchMore: false,
+
+    diseaseValue: '',
+    crowdValue: '',
+    instalmentValue: '',
+    statusValue: '',
+
+    filterInfo: [],
     showAdd: false,
     showEdit: false,
   }
@@ -52,6 +59,8 @@ class Project extends React.Component {
 
   render() {
     const item = this.props.list[this.state.index]
+
+    const hasFilter = !!(this.state.diseaseValue || this.state.crowdValue || this.state.instalmentValue || this.state.statusValue)
 
     return (
       <div className="app-function-page project">
@@ -84,7 +93,7 @@ class Project extends React.Component {
           )
         }
 
-        <QueryFilter beginFilter={this.beginFetch}>
+        <div className="query-filter">
           <SearchBox value={this.state.searchKey}
                      size="big"
                      placeholder="输入关键字查询疾病、申办方或药物"
@@ -96,13 +105,41 @@ class Project extends React.Component {
             <Button type="add" onClick={() => this.setState({showAdd: true})}>新增</Button>
           </SearchBox>
 
-          <FilterItems show={this.state.searchMore}>
-            <FilterItem item={diseaseType}/>
-            <FilterItem item={crowd}/>
-            <FilterItem item={instalment}/>
-            <FilterItem item={status}/>
-          </FilterItems>
-        </QueryFilter>
+          <div className={classnames('more-filter', {'hide': !this.state.searchMore})}>
+            <FilterItem value={this.state.diseaseValue} label={DISEASE_TYPE.label}
+                        itemList={DISEASE_TYPE.itemList} onChange={value => this.setState({diseaseValue: value})}/>
+
+            <FilterItem value={this.state.crowdValue} label={CROWD.label}
+                        itemList={CROWD.itemList} onChange={value => this.setState({crowdValue: value})}/>
+
+            <FilterItem value={this.state.instalmentValue} label={INSTALMENT.label}
+                        itemList={INSTALMENT.itemList} onChange={value => this.setState({instalmentValue: value})}/>
+
+            <FilterItem value={this.state.statusValue} label={STATUS.label}
+                        itemList={STATUS.itemList} onChange={value => this.setState({statusValue: value})}/>
+          </div>
+
+          {
+            (this.state.searchMore || hasFilter) && (
+              <SelectedFilter clearAll={() => this.setState({diseaseValue: '', crowdValue: '', instalmentValue: '', statusValue: ''})}
+                              notEmpty={hasFilter}
+                              beginFilter={this.beginFilter}>
+                <SelectedItem label={DISEASE_TYPE.label} value={this.state.diseaseValue}
+                              itemList={DISEASE_TYPE.itemList} onReset={() => this.setState({diseaseValue: ''})}/>
+
+                <SelectedItem label={CROWD.label} value={this.state.crowdValue}
+                              itemList={CROWD.itemList} onReset={() => this.setState({crowdValue: ''})}/>
+
+                <SelectedItem label={INSTALMENT.label} value={this.state.instalmentValue}
+                              itemList={INSTALMENT.itemList} onReset={() => this.setState({instalmentValue: ''})}/>
+
+                <SelectedItem label={STATUS.label} value={this.state.statusValue}
+                              itemList={STATUS.itemList} onReset={() => this.setState({statusValue: ''})}/>
+              </SelectedFilter>
+            )
+          }
+
+        </div>
 
         <PaginateList ref={c => this._paginateList = c}
                       hasMore={this.props.hasMore}

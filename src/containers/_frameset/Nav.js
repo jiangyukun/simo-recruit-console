@@ -10,6 +10,8 @@ import {getPath} from '../../core/env'
 
 class Nav extends Component {
   render() {
+    const pathname = this.props.router.location.pathname
+
     const {SubMenu, Item} = Menu
 
     const project = getPath('project')
@@ -37,7 +39,7 @@ class Nav extends Component {
           <Menu theme="dark"
                 className="mt-15"
                 defaultOpenKeys={[]}
-                selectedKeys={['']}
+                selectedKeys={[pathname]}
                 mode="inline"
           >
             <Item key={project}>
@@ -107,6 +109,7 @@ class Nav extends Component {
 
 Nav.propTypes = {
   pageList: PropTypes.array,
+  router: PropTypes.any
 }
 
 export default Nav

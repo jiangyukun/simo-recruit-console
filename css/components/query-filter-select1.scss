@@ -1,0 +1,37 @@
+/* query-filter 和 select1集成 */
+
+.query-filter {
+    .select1-container {
+        margin-top: -2px;
+
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 20px;
+            height: 16px;
+        }
+
+        &.selected .selected-item {
+            border-color: #2b77e5;
+        }
+
+        .selected-item {
+            height: 22px;
+        }
+
+        .all-select-items {
+            top: 22px;
+            .search {
+                font-size: 12px;
+            }
+            .no-match-result {
+                font-size: 12px;
+            }
+        }
+
+        .selected-item .select-item-text {
+            padding: 2px 0 0 10px;
+        }
+    }
+}

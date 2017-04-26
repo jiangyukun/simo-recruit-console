@@ -4,6 +4,10 @@ $nav-color: #1c2b36;
     background: $nav-color;
 }
 
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: $nav-color;
+}
+
 .app {
     height: 100%;
     display: flex;

@@ -14,6 +14,7 @@ class Root extends Component {
       <Provider store={this.props.store}>
         <ConnectedRouter history={this.props.history}>
           <PageRoute pageList={this.props.pageList}/>
+
         </ConnectedRouter>
       </Provider>
     )
@@ -27,6 +28,8 @@ class Root extends Component {
 }
 
 Root.propTypes = {
+  store: PropTypes.any,
+  history: PropTypes.any,
   pageList: PropTypes.array
 }
 

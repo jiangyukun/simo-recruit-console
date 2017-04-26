@@ -2,10 +2,10 @@
  * Created by jiangyu2016 on 16/10/15.
  */
 import {createStore, applyMiddleware} from 'redux'
-import request_3_phase from '../middleware/request_3_phase'
-import {ConnectedRouter, routerReducer, routerMiddleware, push} from 'react-router-redux'
+import {routerMiddleware} from 'react-router-redux'
 
 import allReducers from '../reducers/'
+import request_3_phase from '../middleware/request_3_phase'
 
 export default function configureStore(history) {
 
