@@ -15,14 +15,35 @@ let store = configureStore(history)
 
 const pageList = [
   {
-    pageName: 'account-manage'
-  },
-  {
     pageName: 'project'
   },
   {
+    pageName: 'process'
+  },
+  {
+    pageName: 'training'
+  },
+  {
+    pageName: 'knowledge'
+  },
+  {
     pageName: 'question-answer'
-  }
+  },
+  {
+    pageName: 'experience'
+  },
+  {
+    pageName: 'monthly-rating'
+  },
+  {
+    pageName: 'monthly-performance'
+  },
+  {
+    pageName: 'bit-sweet'
+  },
+  {
+    pageName: 'account-manage'
+  },
 ]
 
 render(

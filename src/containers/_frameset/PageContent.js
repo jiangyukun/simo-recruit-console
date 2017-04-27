@@ -9,20 +9,39 @@ import IndexPage from './IndexPage'
 import IllegalAuthority from './IllegalAuthority'
 
 import {pageNames} from '../../core/constants/page'
-import __project from './page/project'
-import question__answer from './page/question__answer'
-import account__manage from './page/account__manage'
+import Chunk from './lazy-page/Chunk'
+import Project from 'bundle-loader?lazy!../1-project/Project'
+import QuestionAnswer from 'bundle-loader?lazy!../3-question-answer/QuestionAnswer'
+import Experience from 'bundle-loader?lazy!../4-experience/Experience'
+import MonthlyRating from 'bundle-loader?lazy!../5-monthly-rating/MonthlyRating'
+import MonthlyPerformance from 'bundle-loader?lazy!../6-monthly-performance/MonthlyPerformance'
+import BitSweet from 'bundle-loader?lazy!../7-bit-sweet/BitSweet'
+import AccountManage from 'bundle-loader?lazy!../8-account-manage/AccountManage'
 
 class PageContent extends Component {
   render() {
     const pageList = this.context.pageList
     const {match} = this.props
 
-    const {accountManage, project, questionAnswer} = pageNames
+    const {
+      project,
+      process, training, knowledge,
+      questionAnswer,
+      experience,
+      monthlyRating,
+      monthlyPerformance,
+      bitSweet,
+      accountManage
+    } = pageNames
+
     const mapper = {
-      [project]: __project(pageList, project),
-      [questionAnswer]: question__answer(pageList, questionAnswer),
-      [accountManage]: account__manage(pageList, accountManage),
+      [project]: () => <Chunk pageList={pageList} pageName={project} load={Project}/>,
+      [questionAnswer]: () => <Chunk pageList={pageList} pageName={questionAnswer} load={QuestionAnswer}/>,
+      [experience]: () => <Chunk pageList={pageList} pageName={experience} load={Experience}/>,
+      [monthlyRating]: () => <Chunk pageList={pageList} pageName={monthlyRating} load={MonthlyRating}/>,
+      [monthlyPerformance]: () => <Chunk pageList={pageList} pageName={monthlyPerformance} load={MonthlyPerformance}/>,
+      [bitSweet]: () => <Chunk pageList={pageList} pageName={bitSweet} load={BitSweet}/>,
+      [accountManage]: () => <Chunk pageList={pageList} pageName={accountManage} load={AccountManage}/>,
     }
 
     return (

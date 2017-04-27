@@ -9,7 +9,10 @@ module.exports = {
   devServer: {
     hot: true,
     inline: true,
-    port: 3011
+    port: 3011,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   },
   output: {
     path: path.join(__dirname, 'dist'),

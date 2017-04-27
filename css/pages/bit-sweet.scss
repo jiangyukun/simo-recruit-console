@@ -1,0 +1,34 @@
+@import '../variables.scss';
+
+.bit-sweet {
+    .album-container {
+        background: #fff;
+        margin: 30px;
+        border: $border;
+        border-radius: 5px;
+    }
+
+    .album-item {
+        display: inline-block;
+        width: 250px;
+        height: 250px;
+        margin: 30px;
+
+        .album-picture-container {
+            width: 220px;
+            border: $border;
+            height: 220px;
+        }
+
+        .img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .album-title {
+            margin-top: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+    }
+}

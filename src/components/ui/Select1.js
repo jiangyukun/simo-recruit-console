@@ -1,19 +1,23 @@
+/**
+ * 下拉框控件
+ */
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {findDOMNode} from 'react-dom'
 import classnames from 'classnames'
 
 import {events} from 'dom-helpers'
-import keycode from '../../core/constants/keycode'
 
-const init = 10
+const keyCode = {
+  UP: 38, DOWN: 40, ENTER: 13, ESCAPE: 27
+}
+const init = 10, increase = 10
 
-export default class Select1 extends Component {
+class Select1 extends Component {
   constructor(props) {
     super(props)
     this.state = {
       active: false,
-      value: props.value + '',
       maxLength: init,
       searchKey: '',
       selectIndex: -1,
@@ -46,18 +50,14 @@ export default class Select1 extends Component {
 
   // 点击选项
   select(option, index) {
-    this.setState({value: option.value, selectIndex: index})
+    this.setState({selectIndex: index})
     this.props.onSelect(option.value, option.text)
     this.close()
   }
 
-  // 选中值为value的选项
-  activeValue(value) {
-    this.setState({value})
-  }
-
   reset() {
-    this.setState({value: '', selectIndex: -1})
+    this.setState({selectIndex: -1})
+    this.props.onSelect('', '')
   }
 
   touch(index) {
@@ -70,7 +70,7 @@ export default class Select1 extends Component {
   }
 
   showMoreItems() {
-    this.setState({maxLength: this.state.maxLength + select1.increase})
+    this.setState({maxLength: this.state.maxLength + increase})
   }
 
   activeOpenFlag() {
@@ -90,7 +90,7 @@ export default class Select1 extends Component {
   handleContainerKeyDown = (event) => {
     if (!this.state.active) {
       switch (event.which) {
-        case keycode.ENTER:
+        case keyCode.ENTER:
           this.open()
           break
         default:
@@ -99,21 +99,21 @@ export default class Select1 extends Component {
       return
     }
     switch (event.which) {
-      case keycode.ESCAPE:
+      case keyCode.ESCAPE:
         event.stopPropagation()
         this.close()
         break
-      case keycode.DOWN:
+      case keyCode.DOWN:
         if (this.state.touchIndex + 1 <= this.currentCount - 1) {
           this.setState({touchIndex: this.state.touchIndex + 1})
         }
         break
-      case keycode.UP:
+      case keyCode.UP:
         if (this.state.touchIndex - 1 >= 0) {
           this.setState({touchIndex: this.state.touchIndex - 1})
         }
         break
-      case keycode.ENTER:
+      case keyCode.ENTER:
         let touchIndex = this.state.touchIndex
         let options = this.props.options
         if (touchIndex >= 0 && touchIndex < options.length) {
@@ -127,20 +127,13 @@ export default class Select1 extends Component {
 
   handleClearBtnClick = () => {
     this.closeFlag = true
-    this.setState({value: '', showClose: false})
-    this.props.onClear()
+    this.setState({showClose: false})
+    this.props.onChange('')
   }
 
   componentDidMount() {
     events.on(findDOMNode(this._container), 'keyup', this.handleContainerKeyDown)
     events.on(document, 'click', this.handleDocumentClick)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    let nextValue = nextProps.value + ''
-    if (nextValue !== this.state.value) {
-      this.activeValue(nextValue)
-    }
   }
 
   componentWillUnmount() {
@@ -150,9 +143,9 @@ export default class Select1 extends Component {
 
   render() {
     let selectText = '请选择'
-    this.props.options.forEach(selectItem => {
-      if (selectItem.value == this.state.value) {
-        selectText = selectItem.text
+    this.props.options.forEach(option => {
+      if (option.value == this.props.value) {
+        selectText = option.text
       }
     })
     let showMore = false, noMatch = true
@@ -196,12 +189,12 @@ export default class Select1 extends Component {
         <div onClick={e => this.toggle()}
              className={classnames('selected-item',
                {'open': this.state.active},
-               {'invalid': this.props.required && this.state.touched && !this.state.value})}
+               {'invalid': this.props.required && this.state.touched && !this.props.value})}
         >
           <span className="select-item-text">{selectText}</span>
           <span className="dropdown"><b></b></span>
           {
-            this.props.showClear && this.state.showClose && this.state.value && (
+            this.props.showClear && this.state.showClose && this.props.value && (
               <span className="close-btn" onClick={this.handleClearBtnClick}>
                 <i className="fa fa-close"></i>
               </span>
@@ -249,7 +242,6 @@ Select1.defaultProps = {
   disabled: false,
   options: [],
   onSelect: function () {},
-  onClear: function () {}
 }
 
 Select1.propTypes = {
@@ -261,3 +253,5 @@ Select1.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool
 }
+
+export default Select1

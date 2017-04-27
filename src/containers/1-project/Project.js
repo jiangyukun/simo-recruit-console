@@ -15,7 +15,7 @@ import AddProject from './dialog/AddProject'
 import EditProject from './dialog/EditProject'
 
 import {DISEASE_TYPE, CROWD, INSTALMENT, STATUS} from '../../core/pages/project'
-import {project} from '../../core/constants/types'
+import {PROJECT} from '../../core/constants/types'
 import {fetchList, add, edit, fetchProjectInfo, deleteProject} from './project.action'
 
 class Project extends React.Component {
@@ -28,7 +28,6 @@ class Project extends React.Component {
     instalmentValue: '',
     statusValue: '',
 
-    filterInfo: [],
     showAdd: false,
     showEdit: false,
   }
@@ -47,13 +46,13 @@ class Project extends React.Component {
 
   componentDidUpdate() {
     if (this.props.addProjectSuccess) {
-      this.props.clearState(project.ADD_PROJECT)
+      this.props.clearState(PROJECT.ADD_PROJECT)
     }
     if (this.props.updateProjectSuccess) {
-      this.props.clearState(project.EDIT_PROJECT)
+      this.props.clearState(PROJECT.EDIT_PROJECT)
     }
     if (this.props.deleteProjectSuccess) {
-      this.props.clearState(project.DELETE_PROJECT)
+      this.props.clearState(PROJECT.DELETE_PROJECT)
     }
   }
 

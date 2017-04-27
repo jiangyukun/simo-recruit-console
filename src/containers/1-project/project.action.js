@@ -2,7 +2,7 @@
  * Created by jiangyukun on 2017/4/12.
  */
 import {_get, _post} from '../../services/http'
-import {project} from '../../core/constants/types'
+import {PROJECT} from '../../core/constants/types'
 import {THREE_PHASE} from '../../middleware/request_3_phase'
 
 import crud, {fileCrud} from '../../core/constants/crud'
@@ -10,7 +10,7 @@ import crud, {fileCrud} from '../../core/constants/crud'
 export function fetchList(options) {
   return {
     [THREE_PHASE]: {
-      type: project.FETCH_LIST,
+      type: PROJECT.FETCH_LIST,
       http: () => _post('/backend/project/v1/getProjectList', {body: options}),
       handleResponse: data => ({hasMore: data['hasMore'], list: data['list']})
     }
@@ -21,7 +21,7 @@ export function add(state) {
   const options = _handleAddOption(state)
   return {
     [THREE_PHASE]: {
-      type: project.ADD_PROJECT,
+      type: PROJECT.ADD_PROJECT,
       http: () => _post('/backend/project/v1/addProject', {body: options}),
       handleResponse: data => ({})
     }
@@ -31,7 +31,7 @@ export function add(state) {
 export function fetchProjectInfo(projectId) {
   return {
     [THREE_PHASE]: {
-      type: project.FETCH_PROJECT_INFO,
+      type: PROJECT.FETCH_PROJECT_INFO,
       http: () => _get(`/backend/project/v1/getProjectInfo/${projectId}`),
       handleResponse: data => ({projectInfo: data})
     }
@@ -42,7 +42,7 @@ export function edit(projectId, state) {
   const options = _handleEditOption(projectId, state)
   return {
     [THREE_PHASE]: {
-      type: project.EDIT_PROJECT,
+      type: PROJECT.EDIT_PROJECT,
       http: () => _post('/backend/project/v1/updateProjectInfo', {body: options}),
       handleResponse: data => ({})
     }
@@ -52,7 +52,7 @@ export function edit(projectId, state) {
 export function deleteProject(projectId) {
   return {
     [THREE_PHASE]: {
-      type: project.DELETE_PROJECT,
+      type: PROJECT.DELETE_PROJECT,
       http: () => _get(`/backend/project/v1/deleteProjectById/${projectId}`)
     }
   }

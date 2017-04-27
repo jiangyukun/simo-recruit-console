@@ -2,24 +2,22 @@
  * Created by jiangyukun on 2017/4/24.
  */
 import {fromJS} from 'immutable'
-import {QUESTION_ANSWER} from '../../core/constants/types'
+import {BIT_SWEET} from '../../core/constants/types'
 import phase from '../../core/constants/phase'
 import {updateList, handleCommonState, handleClear} from '../../core/util/reducer-utils'
 
 const initValue = {
   hasMore: true,
   list: [],
-  recommendList: [],
   loading: false,
 }
 
-export default function question_answer(iState = fromJS(initValue), action) {
+export default function bit_sweet(iState = fromJS(initValue), action) {
 
   let nextIState = iState
   switch (action.type) {
 
-    case QUESTION_ANSWER.FETCH_LIST + phase.SUCCESS:
-      nextIState = iState.set('recommendList', action.recommendList)
+    case BIT_SWEET.FETCH_LIST + phase.SUCCESS:
       nextIState = updateList(nextIState, list => list.concat(action.list)).set('hasMore', action.hasMore)
       break
 
@@ -28,5 +26,5 @@ export default function question_answer(iState = fromJS(initValue), action) {
 
   }
 
-  return handleCommonState(action, QUESTION_ANSWER.FETCH_LIST, nextIState)
+  return handleCommonState(action, BIT_SWEET.FETCH_LIST, nextIState)
 }

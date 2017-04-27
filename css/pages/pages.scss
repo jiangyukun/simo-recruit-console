@@ -1,7 +1,12 @@
+@import '../variables.scss';
 
 .app-function-page {
     color: #58666e;
     overflow: auto;
+
+    .button {
+        font-size: 12px;
+    }
 
     .search-box {
         margin: 15px 30px;
@@ -50,7 +55,38 @@
     .search-more {
         padding: 7px 10px;
     }
+
+    .list-container {
+        margin: 15px 30px;
+    }
+
+    .list-item {
+        background: #fff;
+        border: $border;
+        border-radius: 6px;
+        margin-top: 12px;
+    }
+
+    .item-contents {
+        flex: 1;
+        padding: 0 15px;
+    }
+
+    .content-row {
+        padding: 10px 0;
+        &:not(:last-child) {
+            border-bottom: $border;
+        }
+    }
+
+    .item-buttons {
+        padding: 10px;
+        border-left: $border;
+        text-align: center;
+    }
+
 }
 
 @import "./project.scss";
 @import "./question-answer.scss";
+@import "./bit-sweet.scss";

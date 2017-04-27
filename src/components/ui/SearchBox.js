@@ -11,7 +11,7 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <div className="search-box">
+      <div className={classnames('search-box', this.props.className)}>
         {this.props.children}
         <div className="search-container">
           <Form className="search-form" onSubmit={() => this.props.beginFetch(1)}>
@@ -37,6 +37,7 @@ class SearchBox extends React.Component {
 SearchBox.propTypes = {
   value: PropTypes.string,
   size: PropTypes.oneOf(['small', 'middle', 'big']),
+  className: PropTypes.string,
   placeholder: PropTypes.string,
   onSearchKeyChange: PropTypes.func,
   showMore: PropTypes.bool,

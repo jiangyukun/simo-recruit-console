@@ -13,17 +13,24 @@ class QuestionAnswerItem extends React.Component {
     return (
       <div className="list-item">
         <div className="flex">
-          <div className="question-answer-info">
-            <div className="category-content">
-              <Tag>{item['question_type']}</Tag>
-              <div className="question-answer-content">{item['question_content']}</div>
+          <div className="item-contents">
+            <div className="content-row">
+              <div className="flex">
+                <Tag>{item['question_type']}</Tag>
+                <div className="ml-10 flex1">{item['question_content']}</div>
+              </div>
             </div>
-            <div className="mt-10">
-              {item['name']}
-              <span className="time">{item['question_create_time']}</span>
+            <div className="content-row">
+              <div className="flex">
+                <div className="flex1">
+                  {item['name']}
+                  <span className="time">{item['question_create_time']}</span>
+                </div>
+                <div>{item['question_count']}</div>
+              </div>
             </div>
           </div>
-          <div className="buttons">
+          <div className="item-buttons">
             <div>
               <button className="button default">取消推荐</button>
             </div>

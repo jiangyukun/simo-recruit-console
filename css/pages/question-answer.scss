@@ -1,47 +1,15 @@
 @import '../variables.scss';
 
 .question-answer {
-    .button {
-        font-size: 12px;
-    }
-
-    .list-container {
-        margin: 15px 30px;
-    }
-
-    .list-item {
-        background: #fff;
-        color: #000;
-        border: $border;
-        border-radius: 6px;
-        margin-top: 12px;
-    }
-
-    .question-answer-info {
-        flex: 1;
-        padding: 10px;
-    }
-
     .category-content {
         border-bottom: $border;
         padding-bottom: 10px;
         display: flex;
     }
 
-    .question-answer-content {
-        flex: 1;
-        margin-left: 15px;
-    }
-
     .time {
         margin-left: 10px;
         color: gray;
-    }
-
-    .buttons {
-        padding: 10px;
-        border-left: $border;
-        text-align: center;
     }
 
 }
