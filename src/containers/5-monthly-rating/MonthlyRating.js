@@ -47,7 +47,6 @@ class MonthlyRating extends React.Component {
           <div className="list-container">
             {
               this.props.list.map((item, index) => {
-                console.log(item)
                 return (
                   <div key={item['rating_id']} className="list-item">
                     <div className="flex">

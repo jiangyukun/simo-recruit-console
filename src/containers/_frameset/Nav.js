@@ -10,9 +10,8 @@ import {getPath} from '../../core/env'
 
 class Nav extends Component {
   render() {
-    const pathname = this.props.router.location.pathname
-
     const {SubMenu, Item} = Menu
+    const pathname = this.props.router.location.pathname
 
     const project = getPath('project')
 
@@ -95,7 +94,7 @@ class Nav extends Component {
               </Link>
             </Item>
 
-            <Item key="8">
+            <Item key={accountManage}>
               <Link to={accountManage}>
                 账号管理
               </Link>

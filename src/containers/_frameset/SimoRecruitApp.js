@@ -11,13 +11,12 @@ import PageContent from './PageContent'
 
 class SimoRecruitApp extends Component {
   render() {
-
     return (
       <div className="app">
         <Header/>
         <div className="app-body">
           <Nav router={this.props.router}/>
-          <PageContent match={this.props.match}>{this.props.children}</PageContent>
+          <PageContent match={this.props.match} pageList={this.props.pageList}>{this.props.children}</PageContent>
         </div>
       </div>
     )
@@ -25,7 +24,8 @@ class SimoRecruitApp extends Component {
 }
 
 SimoRecruitApp.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  pageList: PropTypes.array,
 }
 
 function mapStateToProps(state) {

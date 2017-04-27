@@ -11,6 +11,7 @@ import configureStore from './store/configureStore'
 import Root from './containers/Root'
 
 let history = createBrowserHistory()
+
 let store = configureStore(history)
 
 const pageList = [

@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import {BrowserRouter, Route} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 
 import SimoRecruitApp from '../containers/_frameset/SimoRecruitApp'
 
@@ -21,9 +21,7 @@ class PageRoute extends React.Component {
     }
 
     return (
-      <BrowserRouter basename="/">
-        <Route path={rootPath} component={SimoRecruitApp}/>
-      </BrowserRouter>
+      <Route path={rootPath} component={({match}) => <SimoRecruitApp pageList={this.props.pageList} match={match}/>}/>
     )
   }
 }

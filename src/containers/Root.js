@@ -19,21 +19,11 @@ class Root extends Component {
       </Provider>
     )
   }
-
-  getChildContext() {
-    return {
-      pageList: this.props.pageList
-    }
-  }
 }
 
 Root.propTypes = {
   store: PropTypes.any,
   history: PropTypes.any,
-  pageList: PropTypes.array
-}
-
-Root.childContextTypes = {
   pageList: PropTypes.array
 }
 

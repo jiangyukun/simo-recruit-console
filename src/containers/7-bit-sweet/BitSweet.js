@@ -41,7 +41,6 @@ class BitSweet extends React.Component {
           <div className="album-container">
             {
               this.props.list.map((item, index) => {
-                console.log(item)
                 return (
                   <div key={index} className="album-item">
                     <div className="album-picture-container">

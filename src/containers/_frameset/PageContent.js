@@ -20,8 +20,7 @@ import AccountManage from 'bundle-loader?lazy!../8-account-manage/AccountManage'
 
 class PageContent extends Component {
   render() {
-    const pageList = this.context.pageList
-    const {match} = this.props
+    const {match, pageList} = this.props
 
     const {
       project,
@@ -61,12 +60,9 @@ class PageContent extends Component {
   }
 }
 
-PageContent.contextTypes = {
-  pageList: PropTypes.array
-}
-
 PageContent.propTypes = {
-  match: PropTypes.object
+  match: PropTypes.object,
+  pageList: PropTypes.array,
 }
 
 export default PageContent
